@@ -42,17 +42,31 @@ smallfont = pygame.font.SysFont("arial",15)
 #declare variables
 quiz_score = 0
 
+
+
+#functions
+def button(txt, w, h, x, y, color1, color2, function, textsize):
+  mousepos = pygame.mouse.get_pos() #current position of mouse
+  click = pygame.mouse.get_pressed() #state of mouse button
+
+def displaytext(text, color, x, y):
+  text = bigfont.render(text, True, color)
+  gameDisplay.blit(text, (x, y))
+
 #title loop
 def titlescreen():
-  screen.blit(titlescreen_background)
-  TitleScreen = True
+  titlescr = True
   x = 0
   y = 0    
-  while TitleScreen:
-      for event in pygame.event.get():
-          print(event)
-          if event.type == pygame.QUIT:
-              pygame.quit()
-              exit()
-
-  
+  while titlescr:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    gameDisplay.fill(white)
+    gameDisplay.blit(titlescreen_background, (0,0))
+    displaytext("Polyvasion", white, 600, 500)
+    displaytext("Shirdel Yan, Sihan Zeng", white, 1000, 600)
+    pygame.display.update()
+titlescreen()
