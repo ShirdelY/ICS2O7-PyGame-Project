@@ -38,6 +38,10 @@ pygame.display.set_icon(icon)
 #initialize the backgrounds
 titlescreen_background = pygame.image.load("Assets/blue_polygons_background.png")
 titlescreen_background = pygame.transform.scale(titlescreen_background, size)
+mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
+mainmenu_background = pygame.transform.scale(mainmenu_background, size)
+quiz_background = pygame.image.load("Assets/classroom_background.png")
+quiz_background = pygame.transform.scale(quiz_background, size)
 
 #initialize the fonts
 bigfont = pygame.font.SysFont("arial",50)
@@ -98,7 +102,7 @@ def titlescreen():
     displaytext("Shirdel Yan, Sihan Zeng", white, smallfont, 850, 750)
     button("Main Menu", 300, 100, 0, 0, grey, black, "main menu")
     pygame.display.update()
-    clock.tick(30)
+    clock.tick(60)
 
 #def main menu
 def main_menu():
@@ -111,7 +115,6 @@ def main_menu():
         exit()
     
     #create screen
-    mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
     gameDisplay.blit(mainmenu_background, (0, 0))
     
     #create buttons
@@ -121,14 +124,28 @@ def main_menu():
     button("Results", 150, 50, 0, 150, grey, black, "results")
     button("Exit", 150, 50, 0, 200, grey, black, "exit")
     pygame.display.flip()
-    clock.tick(30)
+    clock.tick(60)
 
 #quiz functions
 def quiz(): 
-  global quiz_score
-  quiz_score = 0
-  quiz = True
-  gameDisplay.fill(white)
-  displaytext("Question 1", black, bigfont, 0, 0)
+  quiz = True 
+  while quiz:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    global quiz_score
+    quiz_score = 0
+    quiz = True
+  
+    #create background
+    gameDisplay.blit(quiz_background, (0, 0))
+    displaytext("Question 1", black, bigfont, 0, 0)
+    pygame.display.update()
+    clock.tick(60)
+
+
 titlescreen()
+
 
