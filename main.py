@@ -72,6 +72,14 @@ def button(txt, w, h, x, y, colora, colori, action):
         exit()
       if action == "main menu":
         main_menu()
+      #quiz options
+      if action == "question 1":
+        if txt == "(x+5)(x+6)":
+          global green
+          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+          score += 1
+          pygame.display.update()
+        
   else:
     pygame.draw.rect(gameDisplay, colori ,(x,y,w,h))
   #displaytext(txt, white, bigfont,(x+w/2), (y+h/2))
@@ -136,16 +144,14 @@ def quiz():
         pygame.quit()
         exit()
     global quiz_score
-    quiz_score = 0
-    quiz = True
-  
+    quiz_score = 0  
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Question 1", black, bigfont, 0, 0)
+    displaytext("Fully factor: x² + 11x + 30", black, bigfont, 0, 0)
+    button("(x+5)(x+6)", 150, 150, 100, 100, grey, black, "question1")
     pygame.display.update()
     clock.tick(60)
 
-
 titlescreen()
-
-
