@@ -154,91 +154,11 @@ def quiz():
     click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Fully factor: x² + 11x + 30", black, bigfont, 0, 0)
-    button("(x+5)(x+6)", 150, 150, 100, 100, grey, black, "question1")
-    button("(x+6)(x+6)", 150, 150, 300, 100, grey, black, "question1")
-    button("(x+5)(x+5)", 150, 150, 500, 100, grey, black, "question1")
-    button("(x+5)(y+6)", 150, 150, 700, 100, grey, black, "question1")
-    if click[0] == 1:
-      break
-    pygame.display.update()
-    clock.tick(60)
-  while question1:
-    for event in pygame.event.get():
-      print(event)
-      if event.type == pygame.QUIT:
-        pygame.quit()
-        exit() 
-      quiz_score = 0
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
-    #create background
-    gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Fully factor: x² + 11x + 30", black, bigfont, 0, 0)
-    button("(x+5)(x+6)", 150, 150, 100, 100, grey, black, "question2")
-    button("(x+6)(x+6)", 150, 150, 300, 100, grey, black, "question2")
-    button("(x+5)(x+5)", 150, 150, 500, 100, grey, black, "question2")
-    button("(x+5)(y+6)", 150, 150, 700, 100, grey, black, "question2")
-    if click[0] == 1:
-      break
-    pygame.display.update()
-    clock.tick(60)
-  while question1:
-    for event in pygame.event.get():
-      print(event)
-      if event.type == pygame.QUIT:
-        pygame.quit()
-        exit() 
-      quiz_score = 0
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
-    #create background
-    gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Fully factor: x² + 11x + 30", black, bigfont, 0, 0)
-    button("(x+5)(x+6)", 150, 150, 100, 100, grey, black, "question3")
-    button("(x+6)(x+6)", 150, 150, 300, 100, grey, black, "question3")
-    button("(x+5)(x+5)", 150, 150, 500, 100, grey, black, "question3")
-    button("(x+5)(y+6)", 150, 150, 700, 100, grey, black, "question3")
-    if click[0] == 1:
-      break
-    pygame.display.update()
-    clock.tick(60)
-  while question1:
-    for event in pygame.event.get():
-      print(event)
-      if event.type == pygame.QUIT:
-        pygame.quit()
-        exit() 
-      quiz_score = 0
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
-    #create background
-    gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Fully factor: x² + 11x + 30", black, bigfont, 0, 0)
-    button("(x+5)(x+6)", 150, 150, 100, 100, grey, black, "question4")
-    button("(x+6)(x+6)", 150, 150, 300, 100, grey, black, "question4")
-    button("(x+5)(x+5)", 150, 150, 500, 100, grey, black, "question4")
-    button("(x+5)(y+6)", 150, 150, 700, 100, grey, black, "question4")
-    if click[0] == 1:
-      break
-    pygame.display.update()
-    clock.tick(60)
-  while question1:
-    for event in pygame.event.get():
-      print(event)
-      if event.type == pygame.QUIT:
-        pygame.quit()
-        exit() 
-      quiz_score = 0
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
-    #create background
-    gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Fully factor: x² + 11x + 30", black, bigfont, 0, 0)
-    button("(x+5)(x+6)", 150, 150, 100, 100, grey, black, "question5")
-    button("(x+6)(x+6)", 150, 150, 300, 100, grey, black, "question5")
-    button("(x+5)(x+5)", 150, 150, 500, 100, grey, black, "question5")
-    button("(x+5)(y+6)", 150, 150, 700, 100, grey, black, "question5")
+    displaytext("Fully factor: x² + 11x + 30", white, bigfont, 200, 350)
+    button("(x+5)(x+6)", 150, 150, 100, 600, grey, black, "question1")
+    button("(x+6)(x+6)", 150, 150, 300, 600, grey, black, "question1")
+    button("(x+5)(x+5)", 150, 150, 500, 600, grey, black, "question1")
+    button("(x+5)(y+6)", 150, 150, 700, 600, grey, black, "question1")
     if click[0] == 1:
       break
     pygame.display.update()
