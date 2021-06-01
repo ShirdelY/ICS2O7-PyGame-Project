@@ -60,6 +60,10 @@ def button(txt, w, h, x, y, colora, colori, action):
   click = pygame.mouse.get_pressed() #state of mouse button
   #check if mouse is on button
   global green
+  global red
+  global blue
+  global white
+  global black
   global quiz_score
   if x+w > mousepos[0] > x and y+h > mousepos[1] > y:
     pygame.draw.rect(gameDisplay, colora ,(x,y,w,h))
@@ -83,46 +87,42 @@ def button(txt, w, h, x, y, colora, colori, action):
       if action == "finish_tutorial":
         main_menu()
       #quiz options
+      if action == "goto_quiz2":
+        quiz2()
+      if action == "goto_quiz3":
+        quiz3()
+      if action == "goto_quiz4":
+        quiz4()
+      if action == "goto_quiz5":
+        quiz5()
       if action == "question1":
-        if txt == "(x+5)(x+6)":
-          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+        if txt == "(15 + y)(15 - y)":
           quiz_score += 1
-          pygame.display.update()
-          quiz2()
+          quiz1_exit()
         else:
-          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
-          pygame.display.update()
-          quiz2()
-      if action == "question2":
+          quiz1_exit()
+      if action == "question2": 
         if txt == "(13 + b⁴)(13 - b⁴)":
-          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
           quiz_score += 1
-          pygame.display.update()
-          quiz3()
+          quiz2_exit()
         else:
-          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
-          pygame.display.update()
-          quiz3()
+          quiz2_exit()
       if action == "question3":
         if txt == "(9a + 4)²":
           pygame.draw.rect(gameDisplay, green,(x,y,w,h))
           quiz_score += 1
           pygame.display.update()
-          quiz4()
         else:
           pygame.draw.rect(gameDisplay, red,(x,y,w,h))
           pygame.display.update()
-          quiz4()
       if action == "question4":
         if txt == "(20x² - 16)²":
           pygame.draw.rect(gameDisplay, green,(x,y,w,h))
           quiz_score += 1
           pygame.display.update()
-          quiz5()
         else:
           pygame.draw.rect(gameDisplay, red,(x,y,w,h))
           pygame.display.update()
-          quiz5()
       if action == "question5":
         if txt == "(3p - 18)(p + 2)":
           pygame.draw.rect(gameDisplay, green,(x,y,w,h))
@@ -197,8 +197,6 @@ def quiz1():
         pygame.quit()
         exit() 
       quiz_score = 0
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
     #create buttons
@@ -207,8 +205,28 @@ def quiz1():
     button("(y + 15)²", 150, 150, 300, 600, grey, black, "question1")
     button("(y + 15)(y + 15)", 150, 150, 500, 600, grey, black, "question1")
     button("(y + 15)(y - 15)", 150, 150, 700, 600, grey, black, "question1")
+    button("Next", 300, 150, 900, 600, grey, black, "dummy")
     pygame.display.update()
     clock.tick(60)
+
+def quiz1_exit():
+  print("quiz1_exit")
+  question1_exit = True
+  while question1_exit:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit() 
+    displaytext("Factor: 225 - y²", white, bigfont, 200, 350)
+    button("(15 - y)²", 150, 150, 100, 600, red, red, "dummy")
+    button("(y + 15)²", 150, 150, 300, 600, red, red, "dummy")
+    button("(y + 15)(y + 15)", 150, 150, 500, 600, red, red, "dummy")
+    button("(y + 15)(y - 15)", 150, 150, 700, 600, green, green, "dummy")
+    button("Next", 300, 150, 900, 600, grey, black, "goto_quiz2")
+    pygame.display.update()
+    clock.tick(60)
+
 def quiz2(): 
   question2 = True
   while question2:
@@ -217,8 +235,6 @@ def quiz2():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit() 
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
     #create buttons
@@ -227,8 +243,29 @@ def quiz2():
     button("(13 + b⁴)(13 - b⁴)", 150, 150, 300, 600, grey, black, "question2")
     button("(13 + b⁴)(13 + b⁴)", 150, 150, 500, 600, grey, black, "question2")
     button("(13 - b⁴)(13 - b⁴)", 150, 150, 700, 600, grey, black, "question2")
+    button("Next", 300, 150, 900, 600, grey, black, "dummy")
     pygame.display.update()
     clock.tick(60)
+
+def quiz2_exit():
+  print("quiz2_exit")
+  question2_exit = True
+  while question2_exit:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #create buttons
+    displaytext(" Factor: 169 - b⁸", white, bigfont, 200, 350)
+    button("(13 - b²)²", 150, 150, 100, 600, red, red, "dummy")
+    button("(13 + b⁴)(13 - b⁴)", 150, 150, 300, 600, green, green, "dummy")
+    button("(13 + b⁴)(13 + b⁴)", 150, 150, 500, 600, red, red, "dummy")
+    button("(13 - b⁴)(13 - b⁴)", 150, 150, 700, 600, red, red, "dummy")
+    button("Next", 300, 150, 900, 600, grey, black, "goto_quiz3")
+    pygame.display.update()
+    clock.tick(60)
+
 def quiz3(): 
   question3 = True
   while question3:
@@ -249,6 +286,26 @@ def quiz3():
     button("(9a + 4)(9a - 4)", 150, 150, 700, 600, grey, black, "question3")
     pygame.display.update()
     clock.tick(60)
+
+def quiz3_exit():
+  print("quiz3_exit")
+  question3_exit = True
+  while question3_exit:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #create buttons
+    displaytext("Factor: 81a² + 72a + 16", white, bigfont, 200, 350)
+    button("(9a + 4)²", 150, 150, 100, 600, green, green, "dummy")
+    button("(9a - 4)²", 150, 150, 300, 600, red, red, "dummy")
+    button("(9a + 4)(9a - 4)", 150, 150, 500, 600, red, red, "dummy")
+    button("(9a + 4)(9a - 4)", 150, 150, 700, 600, red, red, "dummy")
+    button("Next", 300, 150, 900, 600, grey, black, "goto_quiz4")
+    pygame.display.update()
+    clock.tick(60)
+
 def quiz4(): 
   question4 = True
   while question4:
@@ -269,6 +326,26 @@ def quiz4():
     button("(20x² - 16)²", 150, 150, 700, 600, grey, black, "question4")
     pygame.display.update()
     clock.tick(60)
+
+def quiz4_exit():
+  print("quiz4_exit")
+  question4_exit = True
+  while question4_exit:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #create buttons
+    displaytext("Factor: 400x⁴ - 640x² + 256", white, bigfont, 200, 350)
+    button("(20x² + 16)²(20x² + 16)²", 150, 150, 100, 600, green, green, "dummy")
+    button("(20x² + 16)²", 150, 150, 300, 600, red, red, "dummy")
+    button("(9a + 4)(9a - 4)", 150, 150, 500, 600, red, red, "dummy")
+    button("(9a + 4)(9a - 4)", 150, 150, 700, 600, red, red, "dummy")
+    button("Next", 300, 150, 900, 600, grey, black, "goto_quiz4")
+    pygame.display.update()
+    clock.tick(60)
+
 def quiz5(): 
   question5 = True
   while question5:
