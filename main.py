@@ -96,37 +96,37 @@ def button(txt, w, h, x, y, colora, colori, action):
       if action == "goto_quiz5":
         quiz5()
       if action == "question1":
-        if txt == "(15 + y)(15 - y)":
+        if txt == "(y + 15)(y - 15)":
           quiz_score += 1
-          print("quiz 1")
+          print(quiz_score)
           quiz1_exit()
         else:
           quiz1_exit()
       if action == "question2": 
         if txt == "(13 + b⁴)(13 - b⁴)":
           quiz_score += 1
-          print("quiz 2")
+          print(quiz_score)
           quiz2_exit()
         else:
           quiz2_exit()
       if action == "question3":
         if txt == "(9a + 4)²":
           quiz_score += 1
-          print("quiz 3")
+          print(quiz_score)
           quiz3_exit()
         else:
           quiz3_exit()
       if action == "question4":
         if txt == "(20x² - 16)²":
           quiz_score += 1
-          print("quiz 4")
+          print(quiz_score)
           quiz4_exit()
         else:
           quiz4_exit()
       if action == "question5":
         if txt == "(3p - 18)(p + 2)":
           quiz_score += 1
-          print("quiz 5")
+          print(quiz_score)
           quiz5_exit()
         else:
           quiz5_exit()
@@ -188,7 +188,7 @@ def main_menu():
 def quiz1(): 
   question1 = True
   global quiz_score
-  quiz_score = 0
+  quiz_score = 0 
   while question1:
     for event in pygame.event.get():
       print(event)
@@ -434,6 +434,7 @@ def display_result():
         exit()
     gameDisplay.fill(white)   
     displaytext(resultprint, black, bigfont, 600, 400)
+    button("Return", 100, 50, 1100, 750, black, grey, "main menu")
     pygame.display.update()
     clock.tick(60)
 titlescreen()
