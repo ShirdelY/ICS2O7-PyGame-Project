@@ -42,6 +42,10 @@ mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
 mainmenu_background = pygame.transform.scale(mainmenu_background, size)
 quiz_background = pygame.image.load("Assets/classroom_background.png")
 quiz_background = pygame.transform.scale(quiz_background, size)
+tutorial1_background = pygame.image.load("Assets/factoringlesson1.png")
+tutorial1_background = pygame.transform.scale(tutorial1_background, size)
+tutorial2_background = pygame.image.load("Assets/factoringlesson2.png")
+tutorial2_background = pygame.transform.scale(tutorial2_background, size)
 
 #initialize the fonts
 bigfont = pygame.font.SysFont("arial",50)
@@ -55,6 +59,8 @@ def button(txt, w, h, x, y, colora, colori, action):
   mousepos = pygame.mouse.get_pos() #current position of mouse
   click = pygame.mouse.get_pressed() #state of mouse button
   #check if mouse is on button
+  global green
+  global quiz_score
   if x+w > mousepos[0] > x and y+h > mousepos[1] > y:
     pygame.draw.rect(gameDisplay, colora ,(x,y,w,h))
     #check left click state
@@ -62,9 +68,9 @@ def button(txt, w, h, x, y, colora, colori, action):
       if action == "game":
         print("game")
       if action == "tutorial":
-        print("tutorial")
+        tutorial1()
       if action == "quiz":
-        quiz()
+        quiz1()
       if action == "results":
         print("results")
       if action == "exit":
@@ -72,16 +78,61 @@ def button(txt, w, h, x, y, colora, colori, action):
         exit()
       if action == "main menu":
         main_menu()
+      if action == "continue_tutorial":
+        tutorial2()
+      if action == "finish_tutorial":
+        main_menu()
       #quiz options
       if action == "question1":
         if txt == "(x+5)(x+6)":
-          global green
-          global quiz_score
           pygame.draw.rect(gameDisplay, green,(x,y,w,h))
           quiz_score += 1
-          print("le poo au chocolat")
-          pygame.display.flip()
-        
+          pygame.display.update()
+          quiz2()
+        else:
+          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
+          pygame.display.update()
+          quiz2()
+      if action == "question2":
+        if txt == "(13 + b⁴)(13 - b⁴)":
+          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+          quiz_score += 1
+          pygame.display.update()
+          quiz3()
+        else:
+          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
+          pygame.display.update()
+          quiz3()
+      if action == "question3":
+        if txt == "(9a + 4)²":
+          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+          quiz_score += 1
+          pygame.display.update()
+          quiz4()
+        else:
+          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
+          pygame.display.update()
+          quiz4()
+      if action == "question4":
+        if txt == "(20x² - 16)²":
+          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+          quiz_score += 1
+          pygame.display.update()
+          quiz5()
+        else:
+          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
+          pygame.display.update()
+          quiz5()
+      if action == "question5":
+        if txt == "(3p - 18)(p + 2)":
+          pygame.draw.rect(gameDisplay, green,(x,y,w,h))
+          quiz_score += 1
+          pygame.display.update()
+          main_menu()
+        else:
+          pygame.draw.rect(gameDisplay, red,(x,y,w,h))
+          pygame.display.update()
+          main_menu()
   else:
     pygame.draw.rect(gameDisplay, colori ,(x,y,w,h))
   #displaytext(txt, white, bigfont,(x+w/2), (y+h/2))
@@ -137,12 +188,8 @@ def main_menu():
     clock.tick(60)
 
 #quiz functions
-def quiz(): 
+def quiz1(): 
   question1 = True
-  question2 = True
-  question3 = True
-  question4 = True
-  question5 = True
   while question1:
     for event in pygame.event.get():
       print(event)
@@ -154,14 +201,127 @@ def quiz():
     click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
-    displaytext("Fully factor: x² + 11x + 30", white, bigfont, 200, 350)
-    button("(x+5)(x+6)", 150, 150, 100, 600, grey, black, "question1")
-    button("(x+6)(x+6)", 150, 150, 300, 600, grey, black, "question1")
-    button("(x+5)(x+5)", 150, 150, 500, 600, grey, black, "question1")
-    button("(x+5)(y+6)", 150, 150, 700, 600, grey, black, "question1")
-    if click[0] == 1:
-      break
+    #create buttons
+    displaytext("Factor: 225 - y²", white, bigfont, 200, 350)
+    button("(15 - y)²", 150, 150, 100, 600, grey, black, "question1")
+    button("(y + 15)²", 150, 150, 300, 600, grey, black, "question1")
+    button("(y + 15)(y + 15)", 150, 150, 500, 600, grey, black, "question1")
+    button("(y + 15)(y - 15)", 150, 150, 700, 600, grey, black, "question1")
+    pygame.display.update()
+    clock.tick(60)
+def quiz2(): 
+  question2 = True
+  while question2:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit() 
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    click = pygame.mouse.get_pressed() #state of mouse button
+    #create background
+    gameDisplay.blit(quiz_background, (0, 0))
+    #create buttons
+    displaytext(" Factor: 169 - b⁸", white, bigfont, 200, 350)
+    button("(13 - b²)²", 150, 150, 100, 600, grey, black, "question2")
+    button("(13 + b⁴)(13 - b⁴)", 150, 150, 300, 600, grey, black, "question2")
+    button("(13 + b⁴)(13 + b⁴)", 150, 150, 500, 600, grey, black, "question2")
+    button("(13 - b⁴)(13 - b⁴)", 150, 150, 700, 600, grey, black, "question2")
+    pygame.display.update()
+    clock.tick(60)
+def quiz3(): 
+  question3 = True
+  while question3:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit() 
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    click = pygame.mouse.get_pressed() #state of mouse button
+    #create background
+    gameDisplay.blit(quiz_background, (0, 0))
+    #create buttons
+    displaytext("Factor: 81a² + 72a + 16", white, bigfont, 200, 350)
+    button("(9a + 4)²", 150, 150, 100, 600, grey, black, "question3")
+    button("(9a - 4)²", 150, 150, 300, 600, grey, black, "question3")
+    button("(9a + 4)(9a - 4)", 150, 150, 500, 600, grey, black, "question3")
+    button("(9a + 4)(9a - 4)", 150, 150, 700, 600, grey, black, "question3")
+    pygame.display.update()
+    clock.tick(60)
+def quiz4(): 
+  question4 = True
+  while question4:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit() 
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    click = pygame.mouse.get_pressed() #state of mouse button
+    #create background
+    gameDisplay.blit(quiz_background, (0, 0))
+    #create buttons
+    displaytext("Factor: 400x⁴ - 640x² + 256", white, bigfont, 200, 350)
+    button("(20x² + 16)²(20x² + 16)²", 150, 150, 100, 600, grey, black, "question4")
+    button("(20x² + 16)²", 150, 150, 300, 600, grey, black, "question4")
+    button("(20x² - 16)(20x² + 16)²", 150, 150, 500, 600, grey, black, "question4")
+    button("(20x² - 16)²", 150, 150, 700, 600, grey, black, "question4")
+    pygame.display.update()
+    clock.tick(60)
+def quiz5(): 
+  question5 = True
+  while question5:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit() 
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    click = pygame.mouse.get_pressed() #state of mouse button
+    #create background
+    gameDisplay.blit(quiz_background, (0, 0))
+    #create buttons
+    displaytext("Fully Factor: 3p² - 12p - 36", white, bigfont, 200, 350)
+    button("(3p - 18)(p - 2)", 150, 150, 100, 600, grey, black, "question5")
+    button("(3p - 18)²", 150, 150, 300, 600, grey, black, "question5")
+    button("(3p - 18)(p + 2)", 150, 150, 500, 600, grey, black, "question5")
+    button("(3p + 18)²", 150, 150, 700, 600, grey, black, "question5")
     pygame.display.update()
     clock.tick(60)
 
+#def tutorial
+def tutorial1():
+  page1 = True
+  while page1:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+      mousepos = pygame.mouse.get_pos() #current position of mouse
+      click = pygame.mouse.get_pressed() #state of mouse button
+      #create tutorial document
+      gameDisplay.blit(tutorial1_background, (0, 0))
+      #create continue button
+      button("Continue", 100, 50, 1100, 750, black, grey, "continue_tutorial")
+      pygame.display.flip()
+      clock.tick(60)
+#page 2 tutorial function
+def tutorial2():
+  page2 = True
+  while page2:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+      mousepos = pygame.mouse.get_pos() #current position of mouse
+      click = pygame.mouse.get_pressed() #state of mouse button
+      #create tutorial document
+      gameDisplay.blit(tutorial2_background, (0, 0))
+      #create continue function
+      button("Finish", 100, 50, 1100, 750, black, grey, "finish_tutorial")
+      pygame.display.update()
+      clock.tick(60)
 titlescreen()
