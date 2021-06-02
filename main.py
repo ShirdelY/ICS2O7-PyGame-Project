@@ -40,6 +40,7 @@ titlescreen_background = pygame.image.load("Assets/blue_polygons_background.png"
 titlescreen_background = pygame.transform.scale(titlescreen_background, size)
 mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
 mainmenu_background = pygame.transform.scale(mainmenu_background, size)
+game_background = 
 quiz_background = pygame.image.load("Assets/classroom_background.png")
 quiz_background = pygame.transform.scale(quiz_background, size)
 tutorial1_background = pygame.image.load("Assets/factoringlesson1.png")
@@ -53,6 +54,18 @@ smallfont = pygame.font.SysFont("arial",15)
 
 #declare variables
 quiz_score = 0
+x_shape1 = 600
+y_shape1 = 400
+direction1_x = 1
+direction1_y = 2
+direction2_x = 3
+direction2_y = 1
+direction3_x = 7
+direction3_y = 4
+direction4_x = 2
+direction4_y = 2
+direction5_x = 1
+direction5_y = 1
 
 #functions
 def button(txt, w, h, x, y, colora, colori, action):
@@ -70,7 +83,7 @@ def button(txt, w, h, x, y, colora, colori, action):
     #check left click state
     if click[0] == 1:
       if action == "game":
-        print("game")
+        playgame()
       if action == "tutorial":
         tutorial1()
       if action == "quiz":
@@ -437,4 +450,29 @@ def display_result():
     button("Return", 100, 50, 1100, 750, black, grey, "main menu")
     pygame.display.update()
     clock.tick(60)
+
+def playgame():
+  global direction1_x
+  global direction1_y
+  global x_shape1
+  global y_shape1
+  playing_game = True
+  while playing_game:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+      mousepos = pygame.mouse.get_pos() #current position of mouse
+      click = pygame.mouse.get_pressed() #state of mouse button
+      x_shape1 += direction1_x #update the x position of the shape
+      y_shape1 += direction1_y #update the y position of the shape
+      #draw the shape
+      gameDisplay.fill(white)
+      pygame.draw.rect ((0, 255, 0), (x_shape1, y_shape1, 40, 40)) #need surface first argument
+      display.update()
+      clock.tick(60)
+
+
+
 titlescreen()
