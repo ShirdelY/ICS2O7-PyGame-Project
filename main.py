@@ -40,7 +40,7 @@ titlescreen_background = pygame.image.load("Assets/blue_polygons_background.png"
 titlescreen_background = pygame.transform.scale(titlescreen_background, size)
 mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
 mainmenu_background = pygame.transform.scale(mainmenu_background, size)
-game_background = 
+game_background = pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
 quiz_background = pygame.image.load("Assets/classroom_background.png")
 quiz_background = pygame.transform.scale(quiz_background, size)
 tutorial1_background = pygame.image.load("Assets/factoringlesson1.png")
@@ -456,6 +456,10 @@ def playgame():
   global direction1_y
   global x_shape1
   global y_shape1
+  global grey
+  global blue
+  global x
+  global y
   playing_game = True
   while playing_game:
     for event in pygame.event.get():
@@ -467,10 +471,14 @@ def playgame():
       click = pygame.mouse.get_pressed() #state of mouse button
       x_shape1 += direction1_x #update the x position of the shape
       y_shape1 += direction1_y #update the y position of the shape
+      if x_shape1 == 1200:
+        direction1_x *= -1
+      if y_shape1 == 800:
+        direction1_y *= 
       #draw the shape
-      gameDisplay.fill(white)
-      pygame.draw.rect ((0, 255, 0), (x_shape1, y_shape1, 40, 40)) #need surface first argument
-      display.update()
+      pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+      pygame.draw.circle(gameDisplay, blue, (x_shape1, y_shape1), 100)
+      pygame.display.update()
       clock.tick(60)
 
 
