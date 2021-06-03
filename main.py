@@ -40,7 +40,8 @@ titlescreen_background = pygame.image.load("Assets/blue_polygons_background.png"
 titlescreen_background = pygame.transform.scale(titlescreen_background, size)
 mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
 mainmenu_background = pygame.transform.scale(mainmenu_background, size)
-game_background = pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+gametutorial_background = pygame.image.load("Assets/gametutorial.png")
+gametutorial_background = pygame.transform.scale(gametutorial_background, size)
 quiz_background = pygame.image.load("Assets/classroom_background.png")
 quiz_background = pygame.transform.scale(quiz_background, size)
 tutorial1_background = pygame.image.load("Assets/factoringlesson1.png")
@@ -58,6 +59,7 @@ x_shape1 = 600
 y_shape1 = 400
 direction1_x = 1
 direction1_y = 2
+colour1 = blue
 direction2_x = 3
 direction2_y = 1
 direction3_x = 7
@@ -83,6 +85,8 @@ def button(txt, w, h, x, y, colora, colori, action):
     #check left click state
     if click[0] == 1:
       if action == "game":
+        teachgame()
+      if action == "startgame":
         playgame()
       if action == "tutorial":
         tutorial1()
@@ -435,6 +439,7 @@ def tutorial2():
       pygame.display.update()
       clock.tick(60)
 
+#result function
 def display_result():
   global quiz_score
   resultprint = "Your score is: " + str(quiz_score)
@@ -451,6 +456,21 @@ def display_result():
     pygame.display.update()
     clock.tick(60)
 
+#game tutorial function
+def teachgame():
+  teaching_game = True
+  while teaching_game:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    gameDisplay.blit(gametutorial_background, (0, 0))
+    button("Start", 100, 50, 1100, 750, black, grey, "startgame")
+    pygame.display.update()
+    clock.tick(60)
+   
+#play game function
 def playgame():
   global direction1_x
   global direction1_y
@@ -460,6 +480,7 @@ def playgame():
   global blue
   global x
   global y
+  global colour1
   playing_game = True
   while playing_game:
     for event in pygame.event.get():
@@ -471,13 +492,17 @@ def playgame():
       click = pygame.mouse.get_pressed() #state of mouse button
       x_shape1 += direction1_x #update the x position of the shape
       y_shape1 += direction1_y #update the y position of the shape
-      if x_shape1 == 1200:
+      if x_shape1 == 1200 or x_shape1 == 0:
         direction1_x *= -1
-      if y_shape1 == 800:
-        direction1_y *= 
+      if y_shape1 == 800 or y_shape1 == 0:
+        direction1_y *= -1
       #draw the shape
       pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
-      pygame.draw.circle(gameDisplay, blue, (x_shape1, y_shape1), 100)
+      pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+      #check if the shape has been clicked on
+      #if event.type == pygame.MOUSEBUTTONDOWN and :
+        #colour1 = grey
+        #print("aodhnaoi")
       pygame.display.update()
       clock.tick(60)
 
