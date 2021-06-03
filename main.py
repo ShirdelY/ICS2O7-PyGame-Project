@@ -522,17 +522,10 @@ def playgame():
         if colour1 != grey:
           colour1 = grey
           game_score += 1
-    if not mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
-      if not mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
-        print("not within rectangle")
-        if click[0] == 1 and click[0] > previous_mouse_state:
-          print("clicked")
-          if game_score > 0:
-            game_score -= 1
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if click[0] == 1 and click[0] > previous_mouse_state:
-        if game_score > 4:
-          game_score -= 5
+        if game_score >= 3:
+          game_score -= 3
     previous_mouse_state = click[0]
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
