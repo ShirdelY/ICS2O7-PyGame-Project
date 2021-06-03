@@ -54,12 +54,15 @@ bigfont = pygame.font.SysFont("arial",50)
 smallfont = pygame.font.SysFont("arial",15)
 
 #declare variables
+previous_mouse_state = 1
 quiz_score = 0
 x_shape1 = 600
 y_shape1 = 400
 direction1_x = 1
 direction1_y = 2
 colour1 = blue
+x_shape2 = 800
+y_shape2 = 200
 direction2_x = 3
 direction2_y = 1
 direction3_x = 7
@@ -68,7 +71,7 @@ direction4_x = 2
 direction4_y = 2
 direction5_x = 1
 direction5_y = 1
-game_score = 0
+game_score = 50
 #functions
 def button(txt, w, h, x, y, colora, colori, action):
   mousepos = pygame.mouse.get_pos() #current position of mouse
@@ -476,12 +479,18 @@ def playgame():
   global direction1_y
   global x_shape1
   global y_shape1
+  global direction2_x
+  global direction2_y
+  global x_shape2
+  global y_shape2
   global grey
   global blue
   global x
   global y
   global colour1
   global game_score
+  global red
+  global previous_mouse_state
   playing_game = True
   while playing_game:
     for event in pygame.event.get():
@@ -491,24 +500,38 @@ def playgame():
         exit()
     mousepos = pygame.mouse.get_pos() #current position of mouse
     click = pygame.mouse.get_pressed() #state of mouse button
-    x_shape1 += direction1_x #update the x position of the shape
-    y_shape1 += direction1_y #update the y position of the shape
-    if x_shape1 == 1200 or x_shape1 == 0:
+    x_shape1 += direction1_x #update the x position of shape 1
+    y_shape1 += direction1_y #update the y position of shape 1
+    x_shape2 += direction2_x #update the x position of shape 2
+    y_shape2 += direction2_y #update the y position of shape 2
+    if x_shape1 >= 1200 or x_shape1 <= 0:
       direction1_x *= -1
-    if y_shape1 == 800 or y_shape1 == 0:
+    if y_shape1 >= 800 or y_shape1 <= 0:
       direction1_y *= -1
+    if x_shape2 >= 1200 or x_shape2 <= 0:
+      direction2_x *= -1
+    if y_shape2 >= 800 or y_shape2 <= 0:
+      direction2_y *= -1
     #draw the shape
     pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
     pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
-      if click[0] == 1:
-        colour1 = grey
-        game_score += 1
+      if click[0] == 1 and click[0] > previous_mouse_state:
+        if colour1 != grey:
+          colour1 = grey
+          game_score += 1
     if not mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
-      if click[0] == 1:
-        game_score -= 1
-    displaytext(str(game_score), colour1, bigfont, 0, 0)
+      if click[0] == 1 and click[0] > previous_mouse_state:
+        if game_score > 0:
+          game_score -= 1
+    if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      if click[0] == 1 and click[0] > previous_mouse_state:
+        if game_score > 0:
+          game_score -= 5
+    previous_mouse_state = click[0]
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
 
