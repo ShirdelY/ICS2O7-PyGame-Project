@@ -90,7 +90,7 @@ def button(txt, w, h, x, y, colora, colori, action):
       if action == "game":
         teachgame()
       if action == "startgame":
-        playgame()
+        playlevel1()
       if action == "tutorial":
         tutorial1()
       if action == "quiz":
@@ -474,7 +474,7 @@ def teachgame():
     clock.tick(60)
    
 #play game function
-def playgame():
+def playlevel1():
   global direction1_x
   global direction1_y
   global x_shape1
@@ -499,7 +499,6 @@ def playgame():
         pygame.quit()
         exit()
     mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
     x_shape1 += direction1_x #update the x position of shape 1
     y_shape1 += direction1_y #update the y position of shape 1
     x_shape2 += direction2_x #update the x position of shape 2
@@ -518,19 +517,16 @@ def playgame():
     pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
-      if click[0] == 1 and click[0] > previous_mouse_state:
+      if event.type == pygame.MOUSEBUTTONDOWN:
         if colour1 != grey:
           colour1 = grey
           game_score += 1
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
-      if click[0] == 1 and click[0] > previous_mouse_state:
+      if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
-    previous_mouse_state = click[0]
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
-
-
 
 titlescreen()
