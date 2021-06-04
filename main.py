@@ -512,11 +512,22 @@ def playlevel1():
           game_score -= 3
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     if colour1 == grey:
-      display_level1_end()
+      playlevel2()
     pygame.display.update()
     clock.tick(60)
 
-def playlevel1():
+def finishlevel1():
+  while playing_game:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    gameDisplay.
+
+
+
+def playlevel2():
   global grey
   global blue
   global green
@@ -562,9 +573,9 @@ def playlevel1():
     if y_shape2 >= 800 or y_shape2 <= 0:
       direction2_y *= -1
     if x_shape3 >= 1200 or x_shape3 <= 0:
-      direction2_x *= -1
+      direction3_x *= -1
     if y_shape3 >= 800 or y_shape3 <= 0:
-      direction2_y *= -1
+      direction3_y *= -1
     #draw the shape
     pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
     pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
@@ -587,8 +598,10 @@ def playlevel1():
           game_score += 3
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     if colour1 == grey and colour2 == grey:
-      display_level2_end()
+      titlescreen()
     pygame.display.update()
     clock.tick(60)
 
+
+    
 titlescreen()
