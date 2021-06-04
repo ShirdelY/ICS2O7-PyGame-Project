@@ -42,6 +42,26 @@ mainmenu_background = pygame.image.load("Assets/darkblue_background.png")
 mainmenu_background = pygame.transform.scale(mainmenu_background, size)
 gametutorial_background = pygame.image.load("Assets/gametutorial.png")
 gametutorial_background = pygame.transform.scale(gametutorial_background, size)
+level1completion_background = pygame.image.load("Assets/level1completion.png")
+level1completion_background = pygame.transform.scale(level1completion_background, size)
+level2completion_background = pygame.image.load("Assets/level2completion.png")
+level2completion_background = pygame.transform.scale(level2completion_background, size)
+level3completion_background = pygame.image.load("Assets/level3completion.png")
+level3completion_background = pygame.transform.scale(level3completion_background, size)
+level4completion_background = pygame.image.load("Assets/level4completion.png")
+level4completion_background = pygame.transform.scale(level4completion_background, size)
+level5completion_background = pygame.image.load("Assets/level5completion.png")
+level5completion_background = pygame.transform.scale(level5completion_background, size)
+level6completion_background = pygame.image.load("Assets/level6completion.png")
+level6completion_background = pygame.transform.scale(level6completion_background, size)
+level7completion_background = pygame.image.load("Assets/level7completion.png")
+level7completion_background = pygame.transform.scale(level7completion_background, size)
+level8completion_background = pygame.image.load("Assets/level8completion.png")
+level8completion_background = pygame.transform.scale(level8completion_background, size)
+level9completion_background = pygame.image.load("Assets/level9completion.png")
+level9completion_background = pygame.transform.scale(level9completion_background, size)
+level10completion_background = pygame.image.load("Assets/level10completion.png")
+level10completion_background = pygame.transform.scale(level10completion_background, size)
 quiz_background = pygame.image.load("Assets/classroom_background.png")
 quiz_background = pygame.transform.scale(quiz_background, size)
 tutorial1_background = pygame.image.load("Assets/factoringlesson1.png")
@@ -76,6 +96,10 @@ def button(txt, w, h, x, y, colora, colori, action):
         teachgame()
       if action == "startgame":
         playlevel1()
+      if action == "startlevel2":
+        playlevel2()
+      if action == "startlevel3":
+        playlevel3()
       if action == "tutorial":
         tutorial1()
       if action == "quiz":
@@ -467,7 +491,7 @@ def playlevel1():
   colour1 = blue
   global game_score
   global red
-  global previous_mouse_state
+  global white
   playing_game = True
   x_shape1 = random.randint(0,1200)
   y_shape1 = random.randint(0,800)
@@ -483,6 +507,9 @@ def playlevel1():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    if colour1 == white:
+      pygame.time.delay(1000)
+      finishlevel1()
     mousepos = pygame.mouse.get_pos() #current position of mouse
     x_shape1 += direction1_x #update the x position of shape 1
     y_shape1 += direction1_y #update the y position of shape 1
@@ -503,29 +530,31 @@ def playlevel1():
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
-        if colour1 != grey:
-          colour1 = grey
+        if colour1 != white:
+          colour1 = white
+          direction1_x = 0.5
+          direction1_y = 0.5
           game_score += 1
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
-    if colour1 == grey:
-      playlevel2()
     pygame.display.update()
     clock.tick(60)
 
 def finishlevel1():
-  while playing_game:
+  finish1 = True
+  while finish1:
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-    gameDisplay.
-
-
+    gameDisplay.blit(level1completion_background, (0, 0))
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel2")
+    pygame.display.update()
+    clock.tick(60)
 
 def playlevel2():
   global grey
@@ -537,7 +566,7 @@ def playlevel2():
   colour2 = green
   global game_score
   global red
-  global previous_mouse_state
+  global white
   playing_game = True
   x_shape1 = random.randint(0,1200)
   y_shape1 = random.randint(0,800)
@@ -557,6 +586,9 @@ def playlevel2():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    if colour1 == white and colour2 == white:
+      pygame.time.delay(1000)
+      finishlevel2()
     mousepos = pygame.mouse.get_pos() #current position of mouse
     x_shape1 += direction1_x #update the x position of shape 1
     y_shape1 += direction1_y #update the y position of shape 1
@@ -584,8 +616,8 @@ def playlevel2():
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
-        if colour1 != grey:
-          colour1 = grey
+        if colour1 != white:
+          colour1 = white
           game_score += 1
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
@@ -593,14 +625,27 @@ def playlevel2():
           game_score -= 3
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
-        if colour2 != grey:
-          colour2 = grey
+        if colour2 != white:
+          colour2 = white
           game_score += 3
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
-    if colour1 == grey and colour2 == grey:
-      titlescreen()
     pygame.display.update()
     clock.tick(60)
+
+def finishlevel2():
+  finish2 = True
+  while finish2:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    gameDisplay.blit(level2completion_background, (0, 0))
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel3")
+    pygame.display.update()
+    clock.tick(60)
+    
+
 
 
     
