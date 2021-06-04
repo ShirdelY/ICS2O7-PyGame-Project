@@ -110,10 +110,12 @@ def button(txt, w, h, x, y, colora, colori, action):
         pygame.quit()
         exit()
       if action == "main menu":
+        pygame.time.delay(100)
         main_menu()
       if action == "continue_tutorial":
         tutorial2()
       if action == "finish_tutorial":
+        pygame.time.delay(100)
         main_menu()
       #quiz options
       if action == "goto_quiz2":
@@ -507,9 +509,6 @@ def playlevel1():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-    if colour1 == white:
-      pygame.time.delay(1000)
-      finishlevel1()
     mousepos = pygame.mouse.get_pos() #current position of mouse
     x_shape1 += direction1_x #update the x position of shape 1
     y_shape1 += direction1_y #update the y position of shape 1
@@ -527,6 +526,11 @@ def playlevel1():
     pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
     pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
     pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    if colour1 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.display.update()
+      pygame.time.delay(1000)
+      finishlevel1()
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
@@ -534,6 +538,7 @@ def playlevel1():
           colour1 = white
           direction1_x = 0.5
           direction1_y = 0.5
+          pygame.display.update()
           game_score += 1
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
@@ -587,6 +592,10 @@ def playlevel2():
         pygame.quit()
         exit()
     if colour1 == white and colour2 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape3, y_shape3), 50)
+      pygame.display.update()
       pygame.time.delay(1000)
       finishlevel2()
     mousepos = pygame.mouse.get_pos() #current position of mouse
@@ -618,7 +627,10 @@ def playlevel2():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour1 != white:
           colour1 = white
+          direction1_x = 0.5
+          direction1_y = 0.5
           game_score += 1
+          pygame.display.update()
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
@@ -627,7 +639,10 @@ def playlevel2():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
           colour2 = white
+          direction3_x = 0.5
+          direction3_y = 0.5
           game_score += 3
+          pygame.display.update()
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
