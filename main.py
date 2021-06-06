@@ -193,7 +193,7 @@ def button(txt, w, h, x, y, colora, colori, action):
     pygame.draw.rect(gameDisplay, colori ,(x,y,w,h))
   #display the text
   textSurf, textRect = text_objects(txt, smallfont)
-  textRect.center = ( (x + (w/2)), (y + (h/2)))
+  textRect.center = ((x + (w/2)), (y + (h/2)))
   gameDisplay.blit(textSurf, textRect)
 
 #display text function
@@ -502,8 +502,8 @@ def tutorial2():
 def display_result():
   #get quiz score
   global quiz_score
+  
   #make the string
-  resultprint = "Your score is: " + str(quiz_score)
   result_screen = True
   while result_screen:
     for event in pygame.event.get():
@@ -514,7 +514,8 @@ def display_result():
         #make background white
     gameDisplay.fill(white)   
     #show the score
-    displaytext(resultprint, black, bigfont, 600, 400)
+    displaytext("Total Score: " + str(quiz_score), black, bigfont, 450, 150)
+    displaytext("You got " + str(quiz_score), black, bigfont, 450, 150)
     #make the main menu button
     button("Return", 100, 50, 1100, 750, black, grey, "main menu")
     pygame.display.update()
@@ -612,7 +613,9 @@ def playlevel1():
         #make sure it doesnt put out a negative score
         if game_score >= 3:
           game_score -= 3
-          #display the score
+        else:
+          game_score = 0
+    #display the score
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
@@ -714,6 +717,8 @@ def playlevel2():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         #make suire the shape hasnt already been clicked on
@@ -851,11 +856,15 @@ def playlevel3():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         #make sure the score doesnt become negative
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         #make sure shape hasnt been previously clicked on
@@ -1023,11 +1032,15 @@ def playlevel4():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         #make sure game score doesnt become negative
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         #make sure shape hasnt already been clicked on
@@ -1052,11 +1065,15 @@ def playlevel4():
         #make sure game score doesnt become negative
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         #make sure game score doesnt become negative
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     #display score
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
@@ -1078,6 +1095,7 @@ def finishlevel4():
     clock.tick(60)    
 
 def playlevel5():
+  #import and declare variables
   global grey
   global blue
   global green
@@ -1093,6 +1111,7 @@ def playlevel5():
   global red
   global white
   playing_game5 = True
+  #generate starting positions
   x_shape1 = random.randint(50,1150)
   y_shape1 = random.randint(50,750)
   x_shape2 = random.randint(0,1100)
@@ -1109,6 +1128,7 @@ def playlevel5():
   y_shape7 = random.randint(0,750)
   x_shape8 = random.randint(50,1150)
   y_shape8 = random.randint(50,750)
+  #generate velocities
   direction1_x = random.randint(1, 5)
   direction1_y = random.randint(1, 5)
   direction2_x = random.randint(1, 7)
@@ -1125,12 +1145,14 @@ def playlevel5():
   direction7_y = random.randint(1, 11)
   direction8_x = random.randint(1, 3)
   direction8_y = random.randint(1, 3)
+  #game loop
   while playing_game5:
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #check if all shapes haev been clicked on
     if colour1 == white and colour2 == white and colour3 == white and colour4 == white:
       displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
       pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
@@ -1157,6 +1179,7 @@ def playlevel5():
     y_shape7 += direction7_y #update the y position of shape 7
     x_shape8 += direction8_x #update the x position of shape 8
     y_shape8 += direction8_y #update the y position of shape 8
+    #make shapes bounce
     if x_shape1 >= 1150 or x_shape1 <= 50:
       direction1_x *= -1
     if y_shape1 >= 750 or y_shape1 <= 50:
@@ -1202,7 +1225,9 @@ def playlevel5():
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure shape hasnt alreadt been clicked on
         if colour1 != white:
+          #make shape white and slow it down
           colour1 = white
           direction1_x = 0.5
           direction1_y = 0.5
@@ -1210,12 +1235,17 @@ def playlevel5():
           pygame.display.update()
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if game score is above 3 to prevent negative scores
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
@@ -1236,10 +1266,14 @@ def playlevel5():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour4 != white:
@@ -1410,10 +1444,14 @@ def playlevel6():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
@@ -1434,10 +1472,14 @@ def playlevel6():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour4 != white:
@@ -1449,6 +1491,8 @@ def playlevel6():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
@@ -1638,10 +1682,14 @@ def playlevel7():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
@@ -1662,10 +1710,14 @@ def playlevel7():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour4 != white:
@@ -1677,6 +1729,8 @@ def playlevel7():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour5 != white:
@@ -1875,10 +1929,14 @@ def playlevel8():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
@@ -1899,10 +1957,14 @@ def playlevel8():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour4 != white:
@@ -1914,6 +1976,8 @@ def playlevel8():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour5 != white:
@@ -2133,10 +2197,14 @@ def playlevel9():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
@@ -2157,10 +2225,14 @@ def playlevel9():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour4 != white:
@@ -2172,6 +2244,8 @@ def playlevel9():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour5 != white:
@@ -2388,47 +2462,69 @@ def playlevel10():
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
-          game_score -= 3 
+          game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3+ 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape11 - 50 and mousepos[0] < x_shape11 + 50 and mousepos[1] > y_shape11 - 50 and mousepos[1] < y_shape11 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     if mousepos[0] > x_shape12 - 50 and mousepos[0] < x_shape12 + 50 and mousepos[1] > y_shape12 - 50 and mousepos[1] < y_shape12 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+        else:
+          game_score = 0
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
