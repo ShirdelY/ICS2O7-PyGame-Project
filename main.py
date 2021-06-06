@@ -109,6 +109,10 @@ def button(txt, w, h, x, y, colora, colori, action):
       #check what action the button executes
       if action == "game":
         teachgame()
+      if action == "mute":
+        mixer.music.pause()
+      if action == "startmusic":
+        mixer.music.unpause()
       if action == "startgame":
         playlevel1()
       if action == "startlevel2":
@@ -243,7 +247,8 @@ def main_menu():
   main_menu = True
   playing_music = True
   mixer.music.load("Assets/gamemusic.wav")
-  mixer.music.set_volume(1.0)
+  mixer.music.set_volume(0.6)
+  mixer.music.play()
   while main_menu:
     #check if pygame is quitting
     for event in pygame.event.get():
@@ -253,25 +258,14 @@ def main_menu():
         exit()
     #create screen
     gameDisplay.blit(mainmenu_background, (0, 0))
-    mixer.music.play()
-    query = input("  ")
-    if query == 'p':
-      # Pausing the music
-      mixer.music.pause()     
-    elif query == 'r':
-      # Resuming the music
-      mixer.music.unpause()
-    elif query == 'e':
-      # Stop the mixer
-      mixer.music.stop()
-      break
- 
     #create buttons
     button("Play", 300, 100, 450, 50, grey, black, "game")
     button("Tutorial", 300, 100, 450, 200, grey, black, "tutorial")
     button("Quiz", 300, 100, 450, 350, grey, black, "quiz")
     button("Results", 300, 100, 450, 500, grey, black, "results")
     button("Exit", 300, 100, 450, 650, grey, black, "exit")
+    button("Mute", 50, 50, 0, 0, grey, black, "mute")
+    button("Start Music", 100, 50, 1100, 0, grey, black, "startmusic")
     pygame.display.flip()
     clock.tick(60)
 
