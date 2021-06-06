@@ -11,6 +11,7 @@
 import pygame
 import random
 import time
+from datetime import date
 
 #initialize pygame
 pygame.init()
@@ -71,6 +72,7 @@ level10completion_background = pygame.image.load("Assets/level10completion.png")
 level10completion_background = pygame.transform.scale(level10completion_background, size)
 quiz_background = pygame.image.load("Assets/classroom_background.png")
 quiz_background = pygame.transform.scale(quiz_background, size)
+results_background = titlescreen_background
 tutorial1_background = pygame.image.load("Assets/factoringlesson1.png")
 tutorial1_background = pygame.transform.scale(tutorial1_background, size)
 tutorial2_background = pygame.image.load("Assets/factoringlesson2.png")
@@ -84,6 +86,9 @@ smallfont = pygame.font.SysFont("arial",15)
 previous_mouse_state = 1
 quiz_score = 0
 game_score = 0
+today = str(date.today())
+highscore = 0
+
 #functions
 def button(txt, w, h, x, y, colora, colori, action):
   mousepos = pygame.mouse.get_pos() #current position of mouse
@@ -126,6 +131,9 @@ def button(txt, w, h, x, y, colora, colori, action):
       if action == "startlevel10":
         playlevel10()
       if action == "endgame":
+        pygame.time.delay(100)
+        displayfinalscore()
+      if action == "return":
         main_menu()
       if action == "tutorial":
         tutorial1()
@@ -221,10 +229,12 @@ def titlescreen():
     #display the title background
     gameDisplay.blit(titlescreen_background, (0,0))
     #show text
-    displaytext("Polyvasion", white, bigfont, 400, 300)
-    displaytext("Shirdel Yan, Sihan Zeng", white, smallfont, 850, 750)
+    displaytext("Polyvasion", white, bigfont, 500, 100)
+    displaytext("Shirdel Yan, Sihan Zeng", white, smallfont, 550, 750)
+    displaytext(today, white, smallfont, 587.5, 250)
+    displaytext("ICS2O7, Ms. Xie", white, smallfont, 575, 200)
     #make main menu button
-    button("Main Menu", 300, 100, 0, 0, grey, black, "main menu")
+    button("Main Menu", 300, 100, 475, 400, grey, black, "main menu")
     pygame.display.update()
     clock.tick(60)
 
@@ -243,11 +253,11 @@ def main_menu():
     gameDisplay.blit(mainmenu_background, (0, 0))
     
     #create buttons
-    button("Play", 150, 50, 0, 0, grey, black, "game")
-    button("Tutorial", 150, 50, 0, 50, grey, black, "tutorial")
-    button("Quiz", 150, 50, 0, 100, grey, black, "quiz")
-    button("Results", 150, 50, 0, 150, grey, black, "results")
-    button("Exit", 150, 50, 0, 200, grey, black, "exit")
+    button("Play", 300, 100, 450, 50, grey, black, "game")
+    button("Tutorial", 300, 100, 450, 200, grey, black, "tutorial")
+    button("Quiz", 300, 100, 450, 350, grey, black, "quiz")
+    button("Results", 300, 100, 450, 500, grey, black, "results")
+    button("Exit", 300, 100, 450, 650, grey, black, "exit")
     pygame.display.flip()
     clock.tick(60)
 
@@ -502,7 +512,14 @@ def tutorial2():
 def display_result():
   #get quiz score
   global quiz_score
-  
+  #calculate the percentage and process the message
+  percentage_score = float((quiz_score/5)*100)
+  message0 = "Please return to the lesson to learn about factoring"
+  message1 = "Please return to the lesson to learn more about factoring"
+  message2 = "Not bad, but please try to reinforce your knowledge about factoring"
+  message3 = "Good job, you could consider retaking the quiz again"
+  message4 = "Amazing job!"
+  message5 = "Perfect score! You are an extraordinary learner!"
   #make the string
   result_screen = True
   while result_screen:
@@ -512,10 +529,24 @@ def display_result():
         pygame.quit()
         exit()
         #make background white
-    gameDisplay.fill(white)   
+    gameDisplay.blit(results_background, (0, 0))  
     #show the score
-    displaytext("Total Score: " + str(quiz_score), black, bigfont, 450, 150)
-    displaytext("You got " + str(quiz_score), black, bigfont, 450, 150)
+    displaytext("Total Score: " + str(quiz_score), white, bigfont, 450, 150)
+    displaytext("You got " + str(percentage_score) + "%", white, bigfont, 450, 300)
+    #display the message depending on the score
+    if quiz_score == 0:
+      displaytext(message0, white, smallfont, 437.5, 450)
+    elif quiz_score == 1:
+      displaytext(message1, white, smallfont, 437.5, 450)
+    elif quiz_score == 2:
+      displaytext(message2, white, smallfont, 400, 450)
+    elif quiz_score == 3:
+      displaytext(message3, white, smallfont, 437.5, 450)
+    elif quiz_score == 4:
+      displaytext(message4, white, smallfont, 562.5, 450)
+    else:
+      displaytext(message5, white, smallfont, 462.5, 450)
+
     #make the main menu button
     button("Return", 100, 50, 1100, 750, black, grey, "main menu")
     pygame.display.update()
@@ -548,6 +579,7 @@ def playlevel1():
   global game_score
   global red
   global white
+  game_score = 0
   #set playing game state
   playing_game1 = True
   #generate starting coordinates for shapes
@@ -1242,13 +1274,16 @@ def playlevel5():
           game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesnt go negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure shape hasnt been previously clicked on
         if colour2 != white:
+          #make shape white and slow it down
           colour2 = white
           direction3_x = 0.5
           direction3_y = 0.5
@@ -1257,6 +1292,7 @@ def playlevel5():
     if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour3 != white:
+          #make shape white and slow it down
           colour3 = white
           direction5_x = 0.5
           direction5_y = 0.5
@@ -2531,6 +2567,10 @@ def playlevel10():
 
 def finishlevel10():
   finish10 = True
+  global highscore
+  global game_score
+  if game_score > highscore:
+    highscore = game_score
   while finish10:
     for event in pygame.event.get():
       print(event)
@@ -2541,5 +2581,19 @@ def finishlevel10():
     button("Continue", 100, 50, 1100, 750, black, grey, "endgame")
     pygame.display.update()
     clock.tick(60) 
-          
+
+def displayfinalscore():
+  displayingscore = True
+  while displayingscore:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    displaytext("Your final score: " + str(game_score), black, bigfont, 375, 400)
+    displaytext("High Score: " + str(highscore), black, bigfont, 425, 600)
+    button("Finish", 100, 50, 1100, 750, black, grey, "return")
+    pygame.display.update()
+    clock.tick(60) 
+
 titlescreen()
