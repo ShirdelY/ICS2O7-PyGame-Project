@@ -113,6 +113,8 @@ def button(txt, w, h, x, y, colora, colori, action):
         mixer.music.pause()
       if action == "startmusic":
         mixer.music.unpause()
+      if action == "showcredits":
+        showcredits()
       if action == "startgame":
         playlevel1()
       if action == "startlevel2":
@@ -245,10 +247,9 @@ def titlescreen():
 #def main menu
 def main_menu():
   main_menu = True
-  playing_music = True
   mixer.music.load("Assets/gamemusic.wav")
   mixer.music.set_volume(0.6)
-  mixer.music.play()
+  mixer.music.play(-1)
   while main_menu:
     #check if pygame is quitting
     for event in pygame.event.get():
@@ -266,6 +267,7 @@ def main_menu():
     button("Exit", 300, 100, 450, 650, grey, black, "exit")
     button("Mute", 50, 50, 0, 0, grey, black, "mute")
     button("Start Music", 100, 50, 1100, 0, grey, black, "startmusic")
+    button("Credits", 150, 50, 1050, 750, grey, black, "showcredits")
     pygame.display.flip()
     clock.tick(60)
 
@@ -562,9 +564,7 @@ def display_result():
 
 #game tutorial function
 def teachgame():
-  global game_music
   teaching_game = True
-  playing_music = True
   while teaching_game:
     for event in pygame.event.get():
       print(event)
@@ -1129,7 +1129,7 @@ def finishlevel4():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-    #display completyion screen
+    #display completion screen
     gameDisplay.blit(level4completion_background, (0, 0))
     #make continue button
     button("Continue", 100, 50, 1100, 750, black, grey, "startlevel5")
@@ -1822,7 +1822,7 @@ def playlevel7():
           game_score += 2
     if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
-        #make sure game score deosnt become negative
+        #make sure game score deosnst become negative
         if game_score >= 3:
           game_score -= 3
         else:
@@ -1878,7 +1878,7 @@ def playlevel8():
   global red
   global white
   playing_game8 = True
-  #generate startign positions
+  #generate starting positions
   x_shape1 = random.randint(50,1150)
   y_shape1 = random.randint(50,750)
   x_shape2 = random.randint(0,1100)
@@ -2077,7 +2077,7 @@ def playlevel8():
           game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
-        #maek sure game score doesnt become negative
+        #make sure game score doesnt become negative
         if game_score >= 3:
           game_score -= 3
         else:
@@ -2093,28 +2093,35 @@ def playlevel8():
           game_score += 2
     if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesnt become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour5 != white:
+          #turn white and slow down
           colour5 = white
           direction10_x = 0.5
           direction10_y = 0.5
           game_score += 25
           pygame.display.update()
-    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
-    pygame.display.update()
-    clock.tick(60)
     if mousepos[0] > x_shape11 - 50 and mousepos[0] < x_shape11 + 50 and mousepos[1] > y_shape11 - 50 and mousepos[1] < y_shape11 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour6 != white:
+          #turn white and slow down
           colour6 = white
           direction11_x = 0.5
           direction11_y = 0.5
           game_score += 3
+    #show score
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+    pygame.display.update()
+    clock.tick(60)
+
 
 def finishlevel8():
   finish8 = True
@@ -2124,12 +2131,15 @@ def finishlevel8():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #make background
     gameDisplay.blit(level8completion_background, (0, 0))
+    #back button
     button("Continue", 100, 50, 1100, 750, black, grey, "startlevel9")
     pygame.display.update()
     clock.tick(60) 
 
 def playlevel9():
+  #import and declare variables
   global grey
   global blue
   global green
@@ -2151,6 +2161,7 @@ def playlevel9():
   global red
   global white
   playing_game9 = True
+  #generate starting positions
   x_shape1 = random.randint(50,1150)
   y_shape1 = random.randint(50,750)
   x_shape2 = random.randint(0,1100)
@@ -2175,6 +2186,7 @@ def playlevel9():
   y_shape11 = random.randint(50,750)
   x_shape12 = random.randint(50,1150)
   y_shape12 = random.randint(50,750)
+  #generate velocities
   direction1_x = random.randint(1, 5)
   direction1_y = random.randint(1, 5)
   direction2_x = random.randint(1, 7)
@@ -2199,12 +2211,14 @@ def playlevel9():
   direction11_y = random.randint(1, 7)
   direction12_x = random.randint(1, 7)
   direction12_y = random.randint(1, 7)
+  #game loop
   while playing_game9:
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #check if all shapes have been clicked
     if colour1 == white and colour2 == white and colour3 == white and colour4 == white and colour6 == white and colour7 == white:
       displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
       pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
@@ -2241,6 +2255,7 @@ def playlevel9():
     y_shape11 += direction11_y #update the y position of shape 10
     x_shape12 += direction12_x #update the x position of shape 10
     y_shape12 += direction12_y #update the y position of shape 10
+    #make shapes bounce
     if x_shape1 >= 1150 or x_shape1 <= 50:
       direction1_x *= -1
     if y_shape1 >= 750 or y_shape1 <= 50:
@@ -2305,8 +2320,10 @@ def playlevel9():
     pygame.draw.circle(gameDisplay, colour7, (x_shape12, y_shape12), 50)
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      #check if shape has been clicked
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour1 != white:
+          #turn white and slow down
           colour1 = white
           direction1_x = 0.5
           direction1_y = 0.5
@@ -2314,19 +2331,23 @@ def playlevel9():
           pygame.display.update()
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour2 != white:
+         #turn white and slow down
           colour2 = white
           direction3_x = 0.5
           direction3_y = 0.5
@@ -2334,7 +2355,9 @@ def playlevel9():
           pygame.display.update()
     if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour3 != white:
+          #turn white and slow down
           colour3 = white
           direction5_x = 0.5
           direction5_y = 0.5
@@ -2342,32 +2365,39 @@ def playlevel9():
           pygame.display.update()
     if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour4 != white:
+          #turn white and slow down
           colour4 = white
           direction8_x = 0.5
           direction8_y = 0.5
           game_score += 2
     if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour5 != white:
+          #turn white and slow down
           colour5 = white
           direction10_x = 0.5
           direction10_y = 0.5
@@ -2375,19 +2405,24 @@ def playlevel9():
           pygame.display.update()
     if mousepos[0] > x_shape11 - 50 and mousepos[0] < x_shape11 + 50 and mousepos[1] > y_shape11 - 50 and mousepos[1] < y_shape11 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour6 != white:
+          #turn white and slow down
           colour6 = white
           direction11_x = 0.5
           direction11_y = 0.5
           game_score += 3
     if mousepos[0] > x_shape12 - 50 and mousepos[0] < x_shape12 + 50 and mousepos[1] > y_shape12 - 50 and mousepos[1] < y_shape12 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour7 != white:
+          #turn white and slow down
           colour7 = white
           direction12_x = 0.5
           direction12_y = 0.5
           game_score += 3
           pygame.display.update()
+    #show score
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
@@ -2400,12 +2435,15 @@ def finishlevel9():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #make background
     gameDisplay.blit(level9completion_background, (0, 0))
+    #back button
     button("Continue", 100, 50, 1100, 750, black, grey, "startlevel10")
     pygame.display.update()
     clock.tick(60)
 
 def playlevel10():
+  #import and declare variables
   global grey
   global blue
   global green
@@ -2422,6 +2460,7 @@ def playlevel10():
   global red
   global white
   playing_game10 = True
+  #generate starting locations
   x_shape1 = random.randint(50,1150)
   y_shape1 = random.randint(50,750)
   x_shape2 = random.randint(0,1100)
@@ -2446,6 +2485,7 @@ def playlevel10():
   y_shape11 = random.randint(0,750)
   x_shape12 = random.randint(0,1100)
   y_shape12 = random.randint(0,750)
+  #generate velocities
   direction1_x = 30
   direction1_y = 30
   direction2_x = 5
@@ -2470,6 +2510,7 @@ def playlevel10():
   direction11_y = 5
   direction12_x = 5
   direction12_y = 5
+  #game loop
   while playing_game10:
     for event in pygame.event.get():
       print(event)
@@ -2507,6 +2548,7 @@ def playlevel10():
     y_shape11 += direction11_y #update the y position of shape 10
     x_shape12 += direction12_x #update the x position of shape 10
     y_shape12 += direction12_y #update the y position of shape 10
+    #make shapes bounce
     if x_shape1 >= 1170 or x_shape1 <= 30:
       direction1_x *= -1
     if y_shape1 >= 750 or y_shape1 <= 50:
@@ -2572,7 +2614,9 @@ def playlevel10():
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 30 and mousepos[0] < x_shape1 + 30 and mousepos[1] > y_shape1 - 30 and mousepos[1] < y_shape1 + 30:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #check if shape has been clicked
         if colour1 != white:
+          #turn white and slow down
           colour1 = white
           direction1_x = 0.5
           direction1_y = 0.5
@@ -2580,70 +2624,82 @@ def playlevel10():
           pygame.display.update()
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3+ 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape10 - 50 and mousepos[0] < x_shape10 + 50 and mousepos[1] > y_shape10 - 50 and mousepos[1] < y_shape10 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape11 - 50 and mousepos[0] < x_shape11 + 50 and mousepos[1] > y_shape11 - 50 and mousepos[1] < y_shape11 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape12 - 50 and mousepos[0] < x_shape12 + 50 and mousepos[1] > y_shape12 - 50 and mousepos[1] < y_shape12 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesn't become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
+    #show score
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
@@ -2660,7 +2716,9 @@ def finishlevel10():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #make background
     gameDisplay.blit(level10completion_background, (0, 0))
+    #continue button
     button("Continue", 100, 50, 1100, 750, black, grey, "endgame")
     pygame.display.update()
     clock.tick(60) 
@@ -2673,10 +2731,34 @@ def displayfinalscore():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #display information
     displaytext("Your final score: " + str(game_score), black, bigfont, 375, 400)
     displaytext("High Score: " + str(highscore), black, bigfont, 425, 600)
+    #finish button
     button("Finish", 100, 50, 1100, 750, black, grey, "return")
     pygame.display.update()
     clock.tick(60) 
+
+#credits function
+def showcredits():
+  showingcredits = True
+  while showingcredits:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #make background
+    pygame.draw.rect(gameDisplay, grey, (0, 0, 1200, 800))
+    #display credits
+    displaytext("Programmers", white, bigfont, 450, 150)
+    displaytext("Shirdel Yan", white, smallfont, 575, 250)
+    displaytext("Sihan Zeng", white, smallfont, 575, 300)
+    displaytext("Music Used", white, bigfont, 475, 500)
+    displaytext("Menu Screen by Jonny Easton", white, smallfont, 500, 600)
+    #return button
+    button("Return", 100, 50, 1100, 750, blue, black, "main menu")
+    pygame.display.update()
+    clock.tick(60)
 
 titlescreen()
