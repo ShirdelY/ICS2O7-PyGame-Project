@@ -23,6 +23,9 @@ red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
 grey = (69, 69, 69)
+pink = (255, 77, 190)
+purple = (153, 51, 255)
+yellow = (255, 255, 51)
 
 #create the screen
 x = 1200
@@ -92,6 +95,7 @@ def button(txt, w, h, x, y, colora, colori, action):
     pygame.draw.rect(gameDisplay, colora ,(x,y,w,h))
     #check left click state
     if click[0] == 1:
+      #check what action the button executes
       if action == "game":
         teachgame()
       if action == "startgame":
@@ -100,6 +104,14 @@ def button(txt, w, h, x, y, colora, colori, action):
         playlevel2()
       if action == "startlevel3":
         playlevel3()
+      if action == "startlevel4":
+        playlevel4()
+      if action == "startlevel5":
+        playlevel5()
+      if action == "startlevel6":
+        playlevel6()
+      if action == "startlevel7":
+        playlevel7()
       if action == "tutorial":
         tutorial1()
       if action == "quiz":
@@ -162,16 +174,19 @@ def button(txt, w, h, x, y, colora, colori, action):
         else:
           quiz5_exit()
   else:
+    #make the rectangle for the button
     pygame.draw.rect(gameDisplay, colori ,(x,y,w,h))
-  #displaytext(txt, white, bigfont,(x+w/2), (y+h/2))
+  #display the text
   textSurf, textRect = text_objects(txt, smallfont)
   textRect.center = ( (x + (w/2)), (y + (h/2)))
   gameDisplay.blit(textSurf, textRect)
 
+#display text function
 def displaytext(text, color, z, x, y):
   text = z.render(text, True, color)
   gameDisplay.blit(text, (x, y))
 
+#text objects function
 def text_objects(text, font):
     textSurface = font.render(text, True, white)
     return textSurface, textSurface.get_rect()
@@ -180,15 +195,20 @@ def text_objects(text, font):
 def titlescreen():
   titlescr = True 
   while titlescr:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #make the background white
     gameDisplay.fill(white)
+    #display the title background
     gameDisplay.blit(titlescreen_background, (0,0))
+    #show text
     displaytext("Polyvasion", white, bigfont, 400, 300)
     displaytext("Shirdel Yan, Sihan Zeng", white, smallfont, 850, 750)
+    #make main menu button
     button("Main Menu", 300, 100, 0, 0, grey, black, "main menu")
     pygame.display.update()
     clock.tick(60)
@@ -197,6 +217,7 @@ def titlescreen():
 def main_menu():
   main_menu = True 
   while main_menu:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
@@ -218,14 +239,17 @@ def main_menu():
 #quiz functions
 def quiz1(): 
   question1 = True
+  #import variables
   global quiz_score
+  #reset quiz score to prevent point farming
   quiz_score = 0 
   while question1:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
-        exit() 
+        exit()
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
     #create buttons
@@ -234,24 +258,30 @@ def quiz1():
     button("(y + 15)²", 150, 150, 300, 600, grey, black, "question1")
     button("(y + 15)(y + 15)", 150, 150, 500, 600, grey, black, "question1")
     button("(y + 15)(y - 15)", 150, 150, 700, 600, grey, black, "question1")
+    #make placeholder next question button
     button("Next", 300, 150, 900, 600, grey, black, "dummy")
     pygame.display.update()
     clock.tick(60)
 
 def quiz1_exit():
+  #trouble shooting thing
   print("quiz1_exit")
   question1_exit = True
   while question1_exit:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit() 
+    #display the question
     displaytext("Factor: 225 - y²", white, bigfont, 200, 350)
+    #show dummy buttons in place of the quiz buttons
     button("(15 - y)²", 150, 150, 100, 600, red, red, "dummy")
     button("(y + 15)²", 150, 150, 300, 600, red, red, "dummy")
     button("(y + 15)(y + 15)", 150, 150, 500, 600, red, red, "dummy")
     button("(y + 15)(y - 15)", 150, 150, 700, 600, green, green, "dummy")
+    #make functional next questions button
     button("Next", 300, 150, 900, 600, grey, black, "goto_quiz2")
     pygame.display.update()
     clock.tick(60)
@@ -259,6 +289,7 @@ def quiz1_exit():
 def quiz2(): 
   question2 = True
   while question2:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
@@ -272,6 +303,7 @@ def quiz2():
     button("(13 + b⁴)(13 - b⁴)", 150, 150, 300, 600, grey, black, "question2")
     button("(13 + b⁴)(13 + b⁴)", 150, 150, 500, 600, grey, black, "question2")
     button("(13 - b⁴)(13 - b⁴)", 150, 150, 700, 600, grey, black, "question2")
+    #make placeholder next question button
     button("Next", 300, 150, 900, 600, grey, black, "dummy")
     pygame.display.update()
     clock.tick(60)
@@ -280,6 +312,7 @@ def quiz2_exit():
   print("quiz2_exit")
   question2_exit = True
   while question2_exit:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
@@ -291,6 +324,7 @@ def quiz2_exit():
     button("(13 + b⁴)(13 - b⁴)", 150, 150, 300, 600, green, green, "dummy")
     button("(13 + b⁴)(13 + b⁴)", 150, 150, 500, 600, red, red, "dummy")
     button("(13 - b⁴)(13 - b⁴)", 150, 150, 700, 600, red, red, "dummy")
+    #make functional next question button
     button("Next", 300, 150, 900, 600, grey, black, "goto_quiz3")
     pygame.display.update()
     clock.tick(60)
@@ -298,13 +332,12 @@ def quiz2_exit():
 def quiz3(): 
   question3 = True
   while question3:
+    #check if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit() 
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
     #create buttons
@@ -332,6 +365,7 @@ def quiz3_exit():
     button("(9a - 4)²", 150, 150, 300, 600, red, red, "dummy")
     button("(9a + 4)(9a - 4)", 150, 150, 500, 600, red, red, "dummy")
     button("(9a + 4)(9a - 4)", 150, 150, 700, 600, red, red, "dummy")
+    #make fucntional next question button
     button("Next", 300, 150, 900, 600, grey, black, "goto_quiz4")
     pygame.display.update()
     clock.tick(60)
@@ -344,8 +378,6 @@ def quiz4():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit() 
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
     #create buttons
@@ -354,6 +386,7 @@ def quiz4():
     button("(20x² + 16)²", 150, 150, 300, 600, grey, black, "question4")
     button("(20x² - 16)(20x² + 16)²", 150, 150, 500, 600, grey, black, "question4")
     button("(20x² - 16)²", 150, 150, 700, 600, grey, black, "question4")
+    #create placeholder next question button
     button("Next", 300, 150, 900, 600, grey, black, "dummy")
     pygame.display.update()
     clock.tick(60)
@@ -373,6 +406,7 @@ def quiz4_exit():
     button("(20x² + 16)²", 150, 150, 300, 600, red, red, "dummy")
     button("(20x² - 16)(20x² + 16)²", 150, 150, 500, 600, red, red, "dummy")
     button("(20x² - 16)²", 150, 150, 700, 600, green, green, "dummy")
+    #create functional next question button
     button("Next", 300, 150, 900, 600, grey, black, "goto_quiz5")
     pygame.display.update()
     clock.tick(60)
@@ -385,8 +419,6 @@ def quiz5():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit() 
-    mousepos = pygame.mouse.get_pos() #current position of mouse
-    click = pygame.mouse.get_pressed() #state of mouse button
     #create background
     gameDisplay.blit(quiz_background, (0, 0))
     #create buttons
@@ -395,6 +427,7 @@ def quiz5():
     button("(3p - 18)²", 150, 150, 300, 600, grey, black, "question5")
     button("(3p - 18)(p + 2)", 150, 150, 500, 600, grey, black, "question5")
     button("(3p + 18)²", 150, 150, 700, 600, grey, black, "question5")
+    #create place holder main menu button
     button("Finish", 300, 150, 900, 600, grey, black, "dummy")
     pygame.display.update()
     clock.tick(60)
@@ -414,6 +447,7 @@ def quiz5_exit():
     button("(3p - 18)²", 150, 150, 300, 600, red, red, "dummy")
     button("(3p - 18)(p + 2)", 150, 150, 500, 600, green, green, "dummy")
     button("(3p + 18)²", 150, 150, 700, 600, red, red, "dummy")
+    #make functional main menu button
     button("Finish", 300, 150, 900, 600, grey, black, "main menu")
     pygame.display.update()
     clock.tick(60)
@@ -427,8 +461,6 @@ def tutorial1():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-      mousepos = pygame.mouse.get_pos() #current position of mouse
-      click = pygame.mouse.get_pressed() #state of mouse button
       #create tutorial document
       gameDisplay.blit(tutorial1_background, (0, 0))
       #create continue button
@@ -444,8 +476,6 @@ def tutorial2():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-      mousepos = pygame.mouse.get_pos() #current position of mouse
-      click = pygame.mouse.get_pressed() #state of mouse button
       #create tutorial document
       gameDisplay.blit(tutorial2_background, (0, 0))
       #create continue function
@@ -455,7 +485,9 @@ def tutorial2():
 
 #result function
 def display_result():
+  #get quiz score
   global quiz_score
+  #make the string
   resultprint = "Your score is: " + str(quiz_score)
   result_screen = True
   while result_screen:
@@ -464,8 +496,11 @@ def display_result():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+        #make background white
     gameDisplay.fill(white)   
+    #show the score
     displaytext(resultprint, black, bigfont, 600, 400)
+    #make the main menu button
     button("Return", 100, 50, 1100, 750, black, grey, "main menu")
     pygame.display.update()
     clock.tick(60)
@@ -479,13 +514,16 @@ def teachgame():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #display the game tutorial
     gameDisplay.blit(gametutorial_background, (0, 0))
+    #make the start button
     button("Start", 100, 50, 1100, 750, black, grey, "startgame")
     pygame.display.update()
     clock.tick(60)
    
 #play game function
 def playlevel1():
+  #import and declare variables
   global grey
   global blue
   global x
@@ -494,38 +532,47 @@ def playlevel1():
   global game_score
   global red
   global white
-  playing_game = True
-  x_shape1 = random.randint(0,1200)
-  y_shape1 = random.randint(0,800)
-  x_shape2 = random.randint(0,1200)
-  y_shape2 = random.randint(0,800)
+  #set playing game state
+  playing_game1 = True
+  #generate starting coordinates for shapes
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  #generate velocities for shapes
   direction1_x = random.randint(1, 5)
   direction1_y = random.randint(1, 5)
   direction2_x = random.randint(1, 7)
   direction2_y = random.randint(1, 7)
-  while playing_game:
+  #game loop
+  while playing_game1:
+    #check if pygame is exiting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #get mouse position
     mousepos = pygame.mouse.get_pos() #current position of mouse
+    #update coordinates for shapes
     x_shape1 += direction1_x #update the x position of shape 1
     y_shape1 += direction1_y #update the y position of shape 1
     x_shape2 += direction2_x #update the x position of shape 2
     y_shape2 += direction2_y #update the y position of shape 2
-    if x_shape1 >= 1200 or x_shape1 <= 0:
+    #check if shapes are at the boundaries of the viewport and make them bounce
+    if x_shape1 >= 1150 or x_shape1 <= 50:
       direction1_x *= -1
-    if y_shape1 >= 800 or y_shape1 <= 0:
+    if y_shape1 >= 750 or y_shape1 <= 50:
       direction1_y *= -1
-    if x_shape2 >= 1200 or x_shape2 <= 0:
+    if x_shape2 >= 1100 or x_shape2 <= 0:
       direction2_x *= -1
-    if y_shape2 >= 800 or y_shape2 <= 0:
+    if y_shape2 >= 750 or y_shape2 <= 0:
       direction2_y *= -1
     #draw the shape
     pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
     pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
     pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    #check if all shapes have been clicked
     if colour1 == white:
       displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
       pygame.display.update()
@@ -533,17 +580,24 @@ def playlevel1():
       finishlevel1()
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      #check if mouse button has just gone down so that it doesnt deduct points every cycle
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure the shape hasnt already been clicked
         if colour1 != white:
           colour1 = white
+          #slow down shape
           direction1_x = 0.5
           direction1_y = 0.5
           pygame.display.update()
           game_score += 1
+    #check if the shape has been clicked on
     if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      #check if mouse button has just gone down so that it doesnt deduct points every cycle
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure it doesnt put out a negative score
         if game_score >= 3:
           game_score -= 3
+          #display the score
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
@@ -551,17 +605,21 @@ def playlevel1():
 def finishlevel1():
   finish1 = True
   while finish1:
+    #see if pygame is quitting
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+    #show completion screen
     gameDisplay.blit(level1completion_background, (0, 0))
+    #make continue button
     button("Continue", 100, 50, 1100, 750, black, grey, "startlevel2")
     pygame.display.update()
     clock.tick(60)
 
 def playlevel2():
+  #import and declare variables
   global grey
   global blue
   global green
@@ -572,25 +630,29 @@ def playlevel2():
   global game_score
   global red
   global white
-  playing_game = True
-  x_shape1 = random.randint(0,1200)
-  y_shape1 = random.randint(0,800)
-  x_shape2 = random.randint(0,1200)
-  y_shape2 = random.randint(0,800)
-  x_shape3 = random.randint(0,1200)
-  y_shape3 = random.randint(0,800)
+  #set playing game state
+  playing_game2 = True
+  #generate starting coordinates for shapes
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  x_shape3 = random.randint(50, 1150)
+  y_shape3 = random.randint(50, 750)
+  #generate velocities for shapes
   direction1_x = random.randint(1, 5)
   direction1_y = random.randint(1, 5)
   direction2_x = random.randint(1, 7)
   direction2_y = random.randint(1, 7)
   direction3_x = random.randint(1, 7)
   direction3_y = random.randint(1, 3)
-  while playing_game:
+  while playing_game2:
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
+        #check if all shapes have been clicked on
     if colour1 == white and colour2 == white:
       displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
       pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
@@ -605,23 +667,515 @@ def playlevel2():
     y_shape2 += direction2_y #update the y position of shape 2
     x_shape3 += direction3_x #update the x position of shape 3
     y_shape3 += direction3_y #update the y position of shape 3
-    if x_shape1 >= 1200 or x_shape1 <= 0:
+    #make the shapes bounce
+    if x_shape1 >= 1150 or x_shape1 <= 50:
       direction1_x *= -1
-    if y_shape1 >= 800 or y_shape1 <= 0:
+    if y_shape1 >= 750 or y_shape1 <= 50:
       direction1_y *= -1
-    if x_shape2 >= 1200 or x_shape2 <= 0:
+    if x_shape2 >= 1100 or x_shape2 <= 0:
       direction2_x *= -1
-    if y_shape2 >= 800 or y_shape2 <= 0:
+    if y_shape2 >= 750 or y_shape2 <= 0:
       direction2_y *= -1
-    if x_shape3 >= 1200 or x_shape3 <= 0:
+    if x_shape3 >= 1150 or x_shape3 <= 50:
       direction3_x *= -1
-    if y_shape3 >= 800 or y_shape3 <= 0:
+    if y_shape3 >= 750 or y_shape3 <= 50:
       direction3_y *= -1
     #draw the shape
     pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
     pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
     pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
     pygame.draw.circle(gameDisplay, colour2, (x_shape3, y_shape3), 50)
+    #check if the shape has been clicked on
+    if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure the shape hasnt been clicked on previously
+        if colour1 != white:
+          colour1 = white
+          direction1_x = 0.5
+          direction1_y = 0.5
+          game_score += 1
+          pygame.display.update()
+    if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make suire the shape hasnt already been clicked on
+        if colour2 != white:
+          #slow down the shape and make it turn white
+          colour2 = white
+          direction3_x = 0.5
+          direction3_y = 0.5
+          game_score += 3
+          pygame.display.update()
+    #show the score
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+    pygame.display.update()
+    clock.tick(60)
+
+def finishlevel2():
+  finish2 = True
+  while finish2:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #show teh level completion background
+    gameDisplay.blit(level2completion_background, (0, 0))
+    #make next level button
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel3")
+    pygame.display.update()
+    clock.tick(60)
+    
+def playlevel3():
+  #import and declare variables
+  global grey
+  global blue
+  global green
+  global x
+  global y
+  global pink
+  colour1 = blue
+  colour2 = green
+  colour3 = pink
+  global game_score
+  global red
+  global white
+  playing_game3 = True
+  #make starting positions for shapes
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  x_shape3 = random.randint(50, 1150)
+  y_shape3 = random.randint(50, 750)
+  x_shape4 = random.randint(0,1100)
+  y_shape4 = random.randint(0,750)
+  x_shape5 = random.randint(50, 1150)
+  y_shape5 = random.randint(50,750)
+  #generate shape velocities
+  direction1_x = random.randint(1, 5)
+  direction1_y = random.randint(1, 5)
+  direction2_x = random.randint(1, 7)
+  direction2_y = random.randint(1, 7)
+  direction3_x = random.randint(1, 7)
+  direction3_y = random.randint(1, 3)
+  direction4_x = random.randint(1, 9)
+  direction4_y = random.randint(1, 9)
+  direction5_x = random.randint(5, 13)
+  direction5_y = random.randint(5, 13)
+  while playing_game3:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #check if all shapes havent been clicked
+    if colour1 == white and colour2 == white and colour3 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape3, y_shape3), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape5, y_shape5), 50)
+      pygame.display.update()
+      pygame.time.delay(1000)
+      finishlevel3()
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    x_shape1 += direction1_x #update the x position of shape 1
+    y_shape1 += direction1_y #update the y position of shape 1
+    x_shape2 += direction2_x #update the x position of shape 2
+    y_shape2 += direction2_y #update the y position of shape 2
+    x_shape3 += direction3_x #update the x position of shape 3
+    y_shape3 += direction3_y #update the y position of shape 3
+    x_shape4 += direction4_x #update the x position of shape 4
+    y_shape4 += direction4_y #update the y position of shape 4
+    x_shape5 += direction5_x #update the x position of shape 5
+    y_shape5 += direction5_y #update the y position of shape 5
+    #make the shapes bounce
+    if x_shape1 >= 1150 or x_shape1 <= 50:
+      direction1_x *= -1
+    if y_shape1 >= 750 or y_shape1 <= 50:
+      direction1_y *= -1
+    if x_shape2 >= 1100 or x_shape2 <= 0:
+      direction2_x *= -1
+    if y_shape2 >= 750 or y_shape2 <= 0:
+      direction2_y *= -1
+    if x_shape3 >= 1150 or x_shape3 <= 50:
+      direction3_x *= -1
+    if y_shape3 >= 750 or y_shape3 <= 50:
+      direction3_y *= -1
+    if x_shape4 >= 1100 or x_shape4 <= 0:
+      direction4_x *= -1
+    if y_shape4 >= 750 or y_shape4 <= 0:
+      direction4_y *= -1
+    if x_shape5 >= 1150 or x_shape5 <= 50:
+      direction5_x *= -1
+    if y_shape5 >= 750 or y_shape5 <= 50:
+      direction5_y *= -1
+    #draw the shape
+    pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+    pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    pygame.draw.circle(gameDisplay, colour2, (x_shape3, y_shape3), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape4, y_shape4, 100, 50))
+    pygame.draw.circle(gameDisplay, colour3, (x_shape5, y_shape5), 50)
+    #check if the shape has been clicked on
+    if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure shape hasnt been previously clicked on
+        if colour1 != white:
+          colour1 = white
+          #slow down teh shape
+          direction1_x = 0.5
+          direction1_y = 0.5
+          game_score += 1
+          pygame.display.update()
+    if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      #make sure the mouse button ws pressed down recentl;y to avoid deducting points on every cycle rapidly
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure the score doesnt become negative
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure shape hasnt been previously clicked on
+        if colour2 != white:
+          colour2 = white
+          direction3_x = 0.5
+          direction3_y = 0.5
+          game_score += 3
+          pygame.display.update()
+    if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure shape hasnt been previously clicked on
+        if colour3 != white:
+          colour3 = white
+          #slow down shape
+          direction5_x = 0.5
+          direction5_y = 0.5
+          game_score += 10
+          pygame.display.update()
+    #display score
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+    pygame.display.update()
+    clock.tick(60)
+
+def finishlevel3():
+  finish3 = True
+  while finish3:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #show finish screen
+    gameDisplay.blit(level3completion_background, (0, 0))
+    #make next level button
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel4")
+    pygame.display.update()
+    clock.tick(60)
+
+def playlevel4():
+  #import and declare variables
+  global grey
+  global blue
+  global green
+  global x
+  global y
+  global pink
+  colour1 = blue
+  colour2 = green
+  colour3 = pink
+  global game_score
+  global red
+  global white
+  playing_game4 = True
+  #generate starting positions
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  x_shape3 = random.randint(50, 1150)
+  y_shape3 = random.randint(50, 750)
+  x_shape4 = random.randint(0,1100)
+  y_shape4 = random.randint(0,750)
+  x_shape5 = random.randint(50, 1150)
+  y_shape5 = random.randint(50,750)
+  x_shape6 = random.randint(0,1100)
+  y_shape6 = random.randint(0,750)
+  x_shape7 = random.randint(0,1100)
+  y_shape7 = random.randint(0,750)
+  #generate velocities
+  direction1_x = random.randint(1, 5)
+  direction1_y = random.randint(1, 5)
+  direction2_x = random.randint(1, 7)
+  direction2_y = random.randint(1, 7)
+  direction3_x = random.randint(1, 7)
+  direction3_y = random.randint(1, 3)
+  direction4_x = random.randint(1, 9)
+  direction4_y = random.randint(1, 9)
+  direction5_x = random.randint(5, 13)
+  direction5_y = random.randint(5, 13)
+  direction6_x = random.randint(1, 11)
+  direction6_y = random.randint(1, 11)
+  direction7_x = random.randint(1, 11)
+  direction7_y = random.randint(1, 11)
+  while playing_game4:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    #make sure all shapes have been clicked before exiting
+    if colour1 == white and colour2 == white and colour3 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape3, y_shape3), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape5, y_shape5), 50)
+      pygame.display.update()
+      pygame.time.delay(1000)
+      finishlevel4()
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    x_shape1 += direction1_x #update the x position of shape 1
+    y_shape1 += direction1_y #update the y position of shape 1
+    x_shape2 += direction2_x #update the x position of shape 2
+    y_shape2 += direction2_y #update the y position of shape 2
+    x_shape3 += direction3_x #update the x position of shape 3
+    y_shape3 += direction3_y #update the y position of shape 3
+    x_shape4 += direction4_x #update the x position of shape 4
+    y_shape4 += direction4_y #update the y position of shape 4
+    x_shape5 += direction5_x #update the x position of shape 5
+    y_shape5 += direction5_y #update the y position of shape 5
+    x_shape6 += direction6_x #update the x position of shape 6
+    y_shape6 += direction6_y #update the y position of shape 6
+    x_shape7 += direction7_x #update the x position of shape 7
+    y_shape7 += direction7_y #update the y position of shape 7
+    #make the shapes bounce
+    if x_shape1 >= 1150 or x_shape1 <= 50:
+      direction1_x *= -1
+    if y_shape1 >= 750 or y_shape1 <= 50:
+      direction1_y *= -1
+    if x_shape2 >= 1100 or x_shape2 <= 0:
+      direction2_x *= -1
+    if y_shape2 >= 750 or y_shape2 <= 0:
+      direction2_y *= -1
+    if x_shape3 >= 1150 or x_shape3 <= 50:
+      direction3_x *= -1
+    if y_shape3 >= 750 or y_shape3 <= 50:
+      direction3_y *= -1
+    if x_shape4 >= 1100 or x_shape4 <= 0:
+      direction4_x *= -1
+    if y_shape4 >= 750 or y_shape4 <= 0:
+      direction4_y *= -1
+    if x_shape5 >= 1150 or x_shape5 <= 50:
+      direction5_x *= -1
+    if y_shape5 >= 750 or y_shape5 <= 50:
+      direction5_y *= -1
+    if x_shape6 >= 1100 or x_shape6 <= 0:
+      direction6_x *= -1 
+    if y_shape6 >= 750 or y_shape6 <= 0:
+      direction6_y *= -1
+    if x_shape7 >= 1100 or x_shape7 <= 0:
+      direction7_x *= -1 
+    if y_shape7 >= 750 or y_shape7 <= 0:
+      direction7_y *= -1  
+    #draw the shapes
+    pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+    pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    pygame.draw.circle(gameDisplay, colour2, (x_shape3, y_shape3), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape4, y_shape4, 100, 50))
+    pygame.draw.circle(gameDisplay, colour3, (x_shape5, y_shape5), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape6, y_shape6, 100, 50))
+    pygame.draw.rect(gameDisplay, red, (x_shape7, y_shape7, 100, 50))
+    #check if the shape has been clicked on
+    if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour1 != white:
+          #turn the shape white and slow it down
+          colour1 = white
+          direction1_x = 0.5
+          direction1_y = 0.5
+          game_score += 1
+          pygame.display.update()
+    if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      #make sure mouse click is recetn
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure game score doesnt become negative
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour2 != white:
+          colour2 = white
+          direction3_x = 0.5
+          direction3_y = 0.5
+          game_score += 3
+          pygame.display.update()
+    if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour3 != white:
+          colour3 = white
+          direction5_x = 0.5
+          direction5_y = 0.5
+          game_score += 10
+          pygame.display.update()
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+    pygame.display.update()
+    clock.tick(60)
+    if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+
+def finishlevel4():
+  finish4 = True
+  while finish4:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    gameDisplay.blit(level4completion_background, (0, 0))
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel5")
+    pygame.display.update()
+    clock.tick(60)    
+
+def playlevel5():
+  global grey
+  global blue
+  global green
+  global x
+  global y
+  global pink
+  global purple
+  colour1 = blue
+  colour2 = green
+  colour3 = pink
+  colour4 = purple
+  global game_score
+  global red
+  global white
+  playing_game5 = True
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  x_shape3 = random.randint(50, 1150)
+  y_shape3 = random.randint(50, 750)
+  x_shape4 = random.randint(0,1100)
+  y_shape4 = random.randint(0,750)
+  x_shape5 = random.randint(50, 1150)
+  y_shape5 = random.randint(50,750)
+  x_shape6 = random.randint(0,1100)
+  y_shape6 = random.randint(0,750)
+  x_shape7 = random.randint(0,1100)
+  y_shape7 = random.randint(0,750)
+  x_shape8 = random.randint(50,1150)
+  y_shape8 = random.randint(50,750)
+  direction1_x = random.randint(1, 5)
+  direction1_y = random.randint(1, 5)
+  direction2_x = random.randint(1, 7)
+  direction2_y = random.randint(1, 7)
+  direction3_x = random.randint(1, 7)
+  direction3_y = random.randint(1, 3)
+  direction4_x = random.randint(1, 9)
+  direction4_y = random.randint(1, 9)
+  direction5_x = random.randint(5, 13)
+  direction5_y = random.randint(5, 13)
+  direction6_x = random.randint(1, 11)
+  direction6_y = random.randint(1, 11)
+  direction7_x = random.randint(1, 11)
+  direction7_y = random.randint(1, 11)
+  direction8_x = random.randint(1, 3)
+  direction8_y = random.randint(1, 3)
+  while playing_game5:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    if colour1 == white and colour2 == white and colour3 == white and colour4 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape3, y_shape3), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape5, y_shape5), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape8, y_shape8), 50)
+      pygame.display.update()
+      pygame.time.delay(1000)
+      finishlevel5()
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    x_shape1 += direction1_x #update the x position of shape 1
+    y_shape1 += direction1_y #update the y position of shape 1
+    x_shape2 += direction2_x #update the x position of shape 2
+    y_shape2 += direction2_y #update the y position of shape 2
+    x_shape3 += direction3_x #update the x position of shape 3
+    y_shape3 += direction3_y #update the y position of shape 3
+    x_shape4 += direction4_x #update the x position of shape 4
+    y_shape4 += direction4_y #update the y position of shape 4
+    x_shape5 += direction5_x #update the x position of shape 5
+    y_shape5 += direction5_y #update the y position of shape 5
+    x_shape6 += direction6_x #update the x position of shape 6
+    y_shape6 += direction6_y #update the y position of shape 6
+    x_shape7 += direction7_x #update the x position of shape 7
+    y_shape7 += direction7_y #update the y position of shape 7
+    x_shape8 += direction8_x #update the x position of shape 8
+    y_shape8 += direction8_y #update the y position of shape 8
+    if x_shape1 >= 1150 or x_shape1 <= 50:
+      direction1_x *= -1
+    if y_shape1 >= 750 or y_shape1 <= 50:
+      direction1_y *= -1
+    if x_shape2 >= 1100 or x_shape2 <= 0:
+      direction2_x *= -1
+    if y_shape2 >= 750 or y_shape2 <= 0:
+      direction2_y *= -1
+    if x_shape3 >= 1150 or x_shape3 <= 50:
+      direction3_x *= -1
+    if y_shape3 >= 750 or y_shape3 <= 50:
+      direction3_y *= -1
+    if x_shape4 >= 1100 or x_shape4 <= 0:
+      direction4_x *= -1
+    if y_shape4 >= 750 or y_shape4 <= 0:
+      direction4_y *= -1
+    if x_shape5 >= 1150 or x_shape5 <= 50:
+      direction5_x *= -1
+    if y_shape5 >= 750 or y_shape5 <= 50:
+      direction5_y *= -1
+    if x_shape6 >= 1100 or x_shape6 <= 0:
+      direction6_x *= -1 
+    if y_shape6 >= 750 or y_shape6 <= 0:
+      direction6_y *= -1
+    if x_shape7 >= 1100 or x_shape7 <= 0:
+      direction7_x *= -1 
+    if y_shape7 >= 750 or y_shape7 <= 0:
+      direction7_y *= -1  
+    if x_shape8 >= 1150 or x_shape8 <= 50:
+      direction8_x *= -1
+    if y_shape8 >= 750 or y_shape8 <= 50:
+      direction8_y *= -1
+    #draw the shape
+    pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+    pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    pygame.draw.circle(gameDisplay, colour2, (x_shape3, y_shape3), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape4, y_shape4, 100, 50))
+    pygame.draw.circle(gameDisplay, colour3, (x_shape5, y_shape5), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape6, y_shape6, 100, 50))
+    pygame.draw.rect(gameDisplay, red, (x_shape7, y_shape7, 100, 50))
+    pygame.draw.circle(gameDisplay, colour4, (x_shape8, y_shape8), 50)
     #check if the shape has been clicked on
     if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
@@ -635,6 +1189,10 @@ def playlevel2():
       if event.type == pygame.MOUSEBUTTONDOWN:
         if game_score >= 3:
           game_score -= 3
+    if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
     if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour2 != white:
@@ -643,25 +1201,437 @@ def playlevel2():
           direction3_y = 0.5
           game_score += 3
           pygame.display.update()
+    if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour3 != white:
+          colour3 = white
+          direction5_x = 0.5
+          direction5_y = 0.5
+          game_score += 10
+          pygame.display.update()
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
+    if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour4 != white:
+          colour4 = white
+          direction8_x = 0.5
+          direction8_y = 0.5
+          game_score += 2
 
-def finishlevel2():
-  finish2 = True
-  while finish2:
+def finishlevel5():
+  finish5 = True
+  while finish5:
     for event in pygame.event.get():
       print(event)
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-    gameDisplay.blit(level2completion_background, (0, 0))
-    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel3")
+    gameDisplay.blit(level5completion_background, (0, 0))
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel6")
+    pygame.display.update()
+    clock.tick(60)  
+
+def playlevel6():
+  global grey
+  global blue
+  global green
+  global x
+  global y
+  global pink
+  global purple
+  colour1 = blue
+  colour2 = green
+  colour3 = pink
+  colour4 = purple
+  global game_score
+  global red
+  global white
+  playing_game6 = True
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  x_shape3 = random.randint(50, 1150)
+  y_shape3 = random.randint(50, 750)
+  x_shape4 = random.randint(0,1100)
+  y_shape4 = random.randint(0,750)
+  x_shape5 = random.randint(50, 1150)
+  y_shape5 = random.randint(50,750)
+  x_shape6 = random.randint(0,1100)
+  y_shape6 = random.randint(0,750)
+  x_shape7 = random.randint(0,1100)
+  y_shape7 = random.randint(0,750)
+  x_shape8 = random.randint(50,1150)
+  y_shape8 = random.randint(50,750)
+  x_shape9 = random.randint(0,1100)
+  y_shape9 = random.randint(0,750)
+  direction1_x = random.randint(1, 5)
+  direction1_y = random.randint(1, 5)
+  direction2_x = random.randint(1, 7)
+  direction2_y = random.randint(1, 7)
+  direction3_x = random.randint(1, 7)
+  direction3_y = random.randint(1, 3)
+  direction4_x = random.randint(1, 9)
+  direction4_y = random.randint(1, 9)
+  direction5_x = random.randint(5, 13)
+  direction5_y = random.randint(5, 13)
+  direction6_x = random.randint(1, 11)
+  direction6_y = random.randint(1, 11)
+  direction7_x = random.randint(1, 11)
+  direction7_y = random.randint(1, 11)
+  direction8_x = random.randint(1, 3)
+  direction8_y = random.randint(1, 3)
+  direction9_x = random.randint(1, 13)
+  direction9_y = random.randint(1, 13)
+  while playing_game6:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    if colour1 == white and colour2 == white and colour3 == white and colour4 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape3, y_shape3), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape5, y_shape5), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape8, y_shape8), 50)
+      pygame.display.update()
+      pygame.time.delay(1000)
+      finishlevel6()
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    x_shape1 += direction1_x #update the x position of shape 1
+    y_shape1 += direction1_y #update the y position of shape 1
+    x_shape2 += direction2_x #update the x position of shape 2
+    y_shape2 += direction2_y #update the y position of shape 2
+    x_shape3 += direction3_x #update the x position of shape 3
+    y_shape3 += direction3_y #update the y position of shape 3
+    x_shape4 += direction4_x #update the x position of shape 4
+    y_shape4 += direction4_y #update the y position of shape 4
+    x_shape5 += direction5_x #update the x position of shape 5
+    y_shape5 += direction5_y #update the y position of shape 5
+    x_shape6 += direction6_x #update the x position of shape 6
+    y_shape6 += direction6_y #update the y position of shape 6
+    x_shape7 += direction7_x #update the x position of shape 7
+    y_shape7 += direction7_y #update the y position of shape 7
+    x_shape8 += direction8_x #update the x position of shape 8
+    y_shape8 += direction8_y #update the y position of shape 8
+    x_shape9 += direction9_x #update the x position of shape 8
+    y_shape9 += direction9_y #update the y position of shape 8
+    if x_shape1 >= 1150 or x_shape1 <= 50:
+      direction1_x *= -1
+    if y_shape1 >= 750 or y_shape1 <= 50:
+      direction1_y *= -1
+    if x_shape2 >= 1100 or x_shape2 <= 0:
+      direction2_x *= -1
+    if y_shape2 >= 750 or y_shape2 <= 0:
+      direction2_y *= -1
+    if x_shape3 >= 1150 or x_shape3 <= 50:
+      direction3_x *= -1
+    if y_shape3 >= 750 or y_shape3 <= 50:
+      direction3_y *= -1
+    if x_shape4 >= 1100 or x_shape4 <= 0:
+      direction4_x *= -1
+    if y_shape4 >= 750 or y_shape4 <= 0:
+      direction4_y *= -1
+    if x_shape5 >= 1150 or x_shape5 <= 50:
+      direction5_x *= -1
+    if y_shape5 >= 750 or y_shape5 <= 50:
+      direction5_y *= -1
+    if x_shape6 >= 1100 or x_shape6 <= 0:
+      direction6_x *= -1 
+    if y_shape6 >= 750 or y_shape6 <= 0:
+      direction6_y *= -1
+    if x_shape7 >= 1100 or x_shape7 <= 0:
+      direction7_x *= -1 
+    if y_shape7 >= 750 or y_shape7 <= 0:
+      direction7_y *= -1  
+    if x_shape8 >= 1150 or x_shape8 <= 50:
+      direction8_x *= -1
+    if y_shape8 >= 750 or y_shape8 <= 50:
+      direction8_y *= -1
+    if x_shape9 >= 1100 or x_shape9 <= 0:
+      direction9_x *= -1
+    if y_shape9 >= 750 or y_shape9 <= 0:
+      direction9_y *= -1
+    #draw the shape
+    pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+    pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    pygame.draw.circle(gameDisplay, colour2, (x_shape3, y_shape3), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape4, y_shape4, 100, 50))
+    pygame.draw.circle(gameDisplay, colour3, (x_shape5, y_shape5), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape6, y_shape6, 100, 50))
+    pygame.draw.rect(gameDisplay, red, (x_shape7, y_shape7, 100, 50))
+    pygame.draw.circle(gameDisplay, colour4, (x_shape8, y_shape8), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape9, y_shape9, 100, 50))
+    #check if the shape has been clicked on
+    if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour1 != white:
+          colour1 = white
+          direction1_x = 0.5
+          direction1_y = 0.5
+          game_score += 1
+          pygame.display.update()
+    if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour2 != white:
+          colour2 = white
+          direction3_x = 0.5
+          direction3_y = 0.5
+          game_score += 3
+          pygame.display.update()
+    if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour3 != white:
+          colour3 = white
+          direction5_x = 0.5
+          direction5_y = 0.5
+          game_score += 10
+          pygame.display.update()
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
-    
+    if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour4 != white:
+          colour4 = white
+          direction8_x = 0.5
+          direction8_y = 0.5
+          game_score += 2
+    if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
 
+def finishlevel6():
+  finish6 = True
+  while finish6:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    gameDisplay.blit(level6completion_background, (0, 0))
+    button("Continue", 100, 50, 1100, 750, black, grey, "startlevel7")
+    pygame.display.update()
+    clock.tick(60)  
 
+def playlevel7():
+  global grey
+  global blue
+  global green
+  global x
+  global y
+  global pink
+  global purple
+  global yellow
+  colour1 = blue
+  colour2 = green
+  colour3 = pink
+  colour4 = purple
+  colour5 = yellow
+  global game_score
+  global red
+  global white
+  playing_game7 = True
+  x_shape1 = random.randint(50,1150)
+  y_shape1 = random.randint(50,750)
+  x_shape2 = random.randint(0,1100)
+  y_shape2 = random.randint(0,750)
+  x_shape3 = random.randint(50, 1150)
+  y_shape3 = random.randint(50, 750)
+  x_shape4 = random.randint(0,1100)
+  y_shape4 = random.randint(0,750)
+  x_shape5 = random.randint(50, 1150)
+  y_shape5 = random.randint(50,750)
+  x_shape6 = random.randint(0,1100)
+  y_shape6 = random.randint(0,750)
+  x_shape7 = random.randint(0,1100)
+  y_shape7 = random.randint(0,750)
+  x_shape8 = random.randint(50,1150)
+  y_shape8 = random.randint(50,750)
+  x_shape9 = random.randint(0,1100)
+  y_shape9 = random.randint(0,750)
+  direction1_x = random.randint(1, 5)
+  direction1_y = random.randint(1, 5)
+  direction2_x = random.randint(1, 7)
+  direction2_y = random.randint(1, 7)
+  direction3_x = random.randint(1, 7)
+  direction3_y = random.randint(1, 3)
+  direction4_x = random.randint(1, 9)
+  direction4_y = random.randint(1, 9)
+  direction5_x = random.randint(5, 13)
+  direction5_y = random.randint(5, 13)
+  direction6_x = random.randint(1, 11)
+  direction6_y = random.randint(1, 11)
+  direction7_x = random.randint(1, 11)
+  direction7_y = random.randint(1, 11)
+  direction8_x = random.randint(1, 3)
+  direction8_y = random.randint(1, 3)
+  direction9_x = random.randint(1, 13)
+  direction9_y = random.randint(1, 13)
+  while playing_game6:
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+    if colour1 == white and colour2 == white and colour3 == white and colour4 == white:
+      displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+      pygame.draw.circle(gameDisplay, white, (x_shape1, y_shape1), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape3, y_shape3), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape5, y_shape5), 50)
+      pygame.draw.circle(gameDisplay, white, (x_shape8, y_shape8), 50)
+      pygame.display.update()
+      pygame.time.delay(1000)
+      finishlevel6()
+    mousepos = pygame.mouse.get_pos() #current position of mouse
+    x_shape1 += direction1_x #update the x position of shape 1
+    y_shape1 += direction1_y #update the y position of shape 1
+    x_shape2 += direction2_x #update the x position of shape 2
+    y_shape2 += direction2_y #update the y position of shape 2
+    x_shape3 += direction3_x #update the x position of shape 3
+    y_shape3 += direction3_y #update the y position of shape 3
+    x_shape4 += direction4_x #update the x position of shape 4
+    y_shape4 += direction4_y #update the y position of shape 4
+    x_shape5 += direction5_x #update the x position of shape 5
+    y_shape5 += direction5_y #update the y position of shape 5
+    x_shape6 += direction6_x #update the x position of shape 6
+    y_shape6 += direction6_y #update the y position of shape 6
+    x_shape7 += direction7_x #update the x position of shape 7
+    y_shape7 += direction7_y #update the y position of shape 7
+    x_shape8 += direction8_x #update the x position of shape 8
+    y_shape8 += direction8_y #update the y position of shape 8
+    x_shape9 += direction9_x #update the x position of shape 8
+    y_shape9 += direction9_y #update the y position of shape 8
+    if x_shape1 >= 1150 or x_shape1 <= 50:
+      direction1_x *= -1
+    if y_shape1 >= 750 or y_shape1 <= 50:
+      direction1_y *= -1
+    if x_shape2 >= 1100 or x_shape2 <= 0:
+      direction2_x *= -1
+    if y_shape2 >= 750 or y_shape2 <= 0:
+      direction2_y *= -1
+    if x_shape3 >= 1150 or x_shape3 <= 50:
+      direction3_x *= -1
+    if y_shape3 >= 750 or y_shape3 <= 50:
+      direction3_y *= -1
+    if x_shape4 >= 1100 or x_shape4 <= 0:
+      direction4_x *= -1
+    if y_shape4 >= 750 or y_shape4 <= 0:
+      direction4_y *= -1
+    if x_shape5 >= 1150 or x_shape5 <= 50:
+      direction5_x *= -1
+    if y_shape5 >= 750 or y_shape5 <= 50:
+      direction5_y *= -1
+    if x_shape6 >= 1100 or x_shape6 <= 0:
+      direction6_x *= -1 
+    if y_shape6 >= 750 or y_shape6 <= 0:
+      direction6_y *= -1
+    if x_shape7 >= 1100 or x_shape7 <= 0:
+      direction7_x *= -1 
+    if y_shape7 >= 750 or y_shape7 <= 0:
+      direction7_y *= -1  
+    if x_shape8 >= 1150 or x_shape8 <= 50:
+      direction8_x *= -1
+    if y_shape8 >= 750 or y_shape8 <= 50:
+      direction8_y *= -1
+    if x_shape9 >= 1100 or x_shape9 <= 0:
+      direction9_x *= -1
+    if y_shape9 >= 750 or y_shape9 <= 0:
+      direction9_y *= -1
+    #draw the shape
+    pygame.draw.rect(gameDisplay, grey, (0, 0, x, y))
+    pygame.draw.circle(gameDisplay, colour1, (x_shape1, y_shape1), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape2, y_shape2, 100, 50))
+    pygame.draw.circle(gameDisplay, colour2, (x_shape3, y_shape3), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape4, y_shape4, 100, 50))
+    pygame.draw.circle(gameDisplay, colour3, (x_shape5, y_shape5), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape6, y_shape6, 100, 50))
+    pygame.draw.rect(gameDisplay, red, (x_shape7, y_shape7, 100, 50))
+    pygame.draw.circle(gameDisplay, colour4, (x_shape8, y_shape8), 50)
+    pygame.draw.rect(gameDisplay, red, (x_shape9, y_shape9, 100, 50))
+    #check if the shape has been clicked on
+    if mousepos[0] > x_shape1 - 50 and mousepos[0] < x_shape1 + 50 and mousepos[1] > y_shape1 - 50 and mousepos[1] < y_shape1 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour1 != white:
+          colour1 = white
+          direction1_x = 0.5
+          direction1_y = 0.5
+          game_score += 1
+          pygame.display.update()
+    if mousepos[0] > x_shape2 - 50 and mousepos[0] < x_shape2 + 50 and mousepos[1] > y_shape2 - 50 and mousepos[1] < y_shape2 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape4 - 50 and mousepos[0] < x_shape4 + 50 and mousepos[1] > y_shape4 - 50 and mousepos[1] < y_shape4 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape3 - 50 and mousepos[0] < x_shape3 + 50 and mousepos[1] > y_shape3 - 50 and mousepos[1] < y_shape3 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour2 != white:
+          colour2 = white
+          direction3_x = 0.5
+          direction3_y = 0.5
+          game_score += 3
+          pygame.display.update()
+    if mousepos[0] > x_shape5 - 50 and mousepos[0] < x_shape5 + 50 and mousepos[1] > y_shape5 - 50 and mousepos[1] < y_shape5 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour3 != white:
+          colour3 = white
+          direction5_x = 0.5
+          direction5_y = 0.5
+          game_score += 10
+          pygame.display.update()
+    displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
+    pygame.display.update()
+    clock.tick(60)
+    if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
+    if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if colour4 != white:
+          colour4 = white
+          direction8_x = 0.5
+          direction8_y = 0.5
+          game_score += 2
+    if mousepos[0] > x_shape9 - 50 and mousepos[0] < x_shape9 + 50 and mousepos[1] > y_shape9 - 50 and mousepos[1] < y_shape9 + 50:
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if game_score >= 3:
+          game_score -= 3
 
-    
 titlescreen()
