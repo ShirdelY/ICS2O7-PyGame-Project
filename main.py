@@ -15,6 +15,7 @@ from datetime import date
 
 #initialize pygame
 pygame.init()
+mixer.init()
 clock = pygame.time.Clock()
 
 #define colors
@@ -81,6 +82,9 @@ tutorial2_background = pygame.transform.scale(tutorial2_background, size)
 #initialize the fonts
 bigfont = pygame.font.SysFont("arial",50)
 smallfont = pygame.font.SysFont("arial",15)
+
+#initialize the music
+game_music = mixer.music.load("")
 
 #declare variables
 previous_mouse_state = 1
@@ -224,15 +228,13 @@ def titlescreen():
       if event.type == pygame.QUIT:
         pygame.quit()
         exit()
-    #make the background white
-    gameDisplay.fill(white)
     #display the title background
     gameDisplay.blit(titlescreen_background, (0,0))
     #show text
-    displaytext("Polyvasion", white, bigfont, 500, 100)
-    displaytext("Shirdel Yan, Sihan Zeng", white, smallfont, 550, 750)
-    displaytext(today, white, smallfont, 587.5, 250)
-    displaytext("ICS2O7, Ms. Xie", white, smallfont, 575, 200)
+    displaytext("Polyvasion", yellow, bigfont, 500, 100)
+    displaytext("Shirdel Yan, Sihan Zeng", purple, smallfont, 550, 750)
+    displaytext(today, red, smallfont, 587.5, 250)
+    displaytext("ICS2O7, Ms. Xie", blue, smallfont, 575, 200)
     #make main menu button
     button("Main Menu", 300, 100, 475, 400, grey, black, "main menu")
     pygame.display.update()
@@ -1300,12 +1302,14 @@ def playlevel5():
           pygame.display.update()
     if mousepos[0] > x_shape6 - 50 and mousepos[0] < x_shape6 + 50 and mousepos[1] > y_shape6 - 50 and mousepos[1] < y_shape6 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesnt become negative
         if game_score >= 3:
           game_score -= 3
         else:
           game_score = 0
     if mousepos[0] > x_shape7 - 50 and mousepos[0] < x_shape7 + 50 and mousepos[1] > y_shape7 - 50 and mousepos[1] < y_shape7 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
+        #make sure score doesnt become negative
         if game_score >= 3:
           game_score -= 3
         else:
@@ -1313,10 +1317,12 @@ def playlevel5():
     if mousepos[0] > x_shape8 - 50 and mousepos[0] < x_shape8 + 50 and mousepos[1] > y_shape8 - 50 and mousepos[1] < y_shape8 + 50:
       if event.type == pygame.MOUSEBUTTONDOWN:
         if colour4 != white:
+          #slow down shape and turn it white
           colour4 = white
           direction8_x = 0.5
           direction8_y = 0.5
           game_score += 2
+    #display score
     displaytext(("Score: " + str(game_score)), blue, bigfont, 0, 0)
     pygame.display.update()
     clock.tick(60)
