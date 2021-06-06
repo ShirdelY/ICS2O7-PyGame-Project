@@ -1,0 +1,34 @@
+﻿User Guide
+
+
+To start the program, open it and click on “Main Menu”.
+
+
+Once there, you will have 5 options as to what you want to do next: Play, Tutorial, Quiz, Results, and Exit.
+
+
+If you click play, the Polyvasion game will begin. If you click Tutorial, a lesson on factoring will be given which is what the quiz is about.
+
+
+If you click quiz, you will be asked 5 questions about factoring and be forced to answer them.
+
+
+If you click results, you will see your results of the quiz. 
+
+
+If you click exit, the program will close.
+
+
+1. Polyvasion game: Polyvasion is a clicker game where your goal is to click on all the circles on screen. These circles give you points, but there are also rectangles that if you do click on, will deduct points. As a result, you should strive to click on all the circles while not clicking on any rectangles. Circles turn white and slow down after you have clicked on them. There are a total of 10 levels, with each successive level increasing in difficulty either by having faster moving circles or more rectangles on screen. Starting from level 7, there will be a “Golden Circle'' that moves extremely quickly, but is optional to click (you don’t need to click on it to end the level). Should you click on it however, you will gain a large amount of extra points. In order to achieve the perfect score, this circle should be clicked on whenever possible. 
+
+
+2. Tutorial: The factoring lesson contains 2 slides that teach and demonstrate how to factor 4 types of expressions. These are: Difference of Squares, Trinomial Sum of Squares, Trinomial Difference of Squares, and Quadratic Expressions. On the quiz, you will be asked to factor these 4 types of expressions. In order to continue to the next slide or return to the main menu, click on the button at the bottom right that says “Continue” or “Return”.
+
+
+3. Quiz: By clicking on this, you will be asked 5 multiple choice questions regarding factoring, the subject taught in the lesson. There will be a total of 4 options, with one being the correct answer. After clicking on your answer, you can click on the “Next” button to continue onto the next question, or the “Finish” button to return to the main menu after completing the fifth question.
+
+
+4. Results: This shows you your total score out of 5, the percentage of correct answers, and a comment based on your performance on the quiz. After seeing this, you can click the “Return” button to go back to the main menu.
+
+
+5. Exit: Clicking on this button will close the program.
